@@ -1,7 +1,5 @@
-import 'package:cosmetics/views/on_bording1.dart';
-import 'package:cosmetics/views/on_bording2.dart';
-import 'package:cosmetics/views/on_bording3.dart';
-import 'package:cosmetics/views/splash_view.dart';
+import 'package:cosmetics/splash.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'
     show ScreenUtil, ScreenUtilInit;
@@ -31,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return MaterialApp(
           theme: ThemeData(splashColor: Colors.transparent),
-          home: const SplashView(),
+          home: const Splash(),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
         );
