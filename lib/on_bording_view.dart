@@ -39,8 +39,6 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
     },
   ];
 
-  // هل الصفحة اللي جاية آخر صفحة؟
-
   void nextPage() {
     if (currentIndex < pages.length - 1) {
       setState(() {
@@ -49,9 +47,8 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => LoginView()),
+        MaterialPageRoute(builder: (c) => LoginView()),
       );
-      print("Onboarding finished");
     }
   }
 

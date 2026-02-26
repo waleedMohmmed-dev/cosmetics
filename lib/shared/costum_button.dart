@@ -53,7 +53,7 @@ class CostumButton extends StatelessWidget {
             buttonText ?? "",
             style: TextStyle(
               color: textColor ?? Colors.white,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
               fontSize: fontSize ?? 16.sp,
             ),
           ),

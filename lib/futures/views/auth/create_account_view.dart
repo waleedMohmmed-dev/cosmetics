@@ -1,26 +1,29 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/futures/views/auth/forget_password.dart';
-import 'package:cosmetics/futures/views/auth/create_account_view.dart';
-
-import 'package:cosmetics/root.dart';
+import 'package:cosmetics/futures/views/auth/login_view.dart';
+import 'package:cosmetics/futures/views/auth/verify_view.dart';
 import 'package:cosmetics/shared/costum_button.dart';
 import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class CreateAccountView extends StatefulWidget {
+  const CreateAccountView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<CreateAccountView> createState() => _RegisterViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final TextEditingController _passwordController = TextEditingController();
+class _RegisterViewState extends State<CreateAccountView> {
+  final TextEditingController nameContoller = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _subNamburController = TextEditingController();
 
   final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,102 +32,77 @@ class _LoginViewState extends State<LoginView> {
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
         child: Column(
           children: [
-            Gap(100),
+            Gap(120),
             Center(
               child: Image.asset(
-                'assets/images/login_logo.png',
-                width: 280.w,
-                height: 227.h,
+                'assets/images/splash_image.png',
+                height: 57.sp,
+                width: 67.sp,
               ),
             ),
-            Gap(20),
+            Gap(40),
             Text(
-              'Login Now',
+              'Create Account',
               style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat',
                 color: AppColors.primaryColor,
+                fontFamily: 'Montserrat',
               ),
             ),
-            Gap(14),
-            Text(
-              'Please enter the details below to continue',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w300,
-                fontFamily: 'Montserrat',
-                color: AppColors.primaryColor,
-              ),
-            ),
-            Gap(25),
+            Gap(50),
+            CostumTextField(labelText: 'Your Name', controller: nameContoller),
+            Gap(20),
+            CostumTextField(labelText: 'Email', controller: _emailController),
+            Gap(20),
 
-            /// text fields
             Row(
               children: [
                 CostumTextField(
-                  hintText: '+20',
+                  labelText: '+20 ',
+                  width: 72.w,
                   height: 46.h,
-                  width: 78.w,
                   controller: _subNamburController,
-                  // suffixIcon: Icon(Icons.arrow_drop_down, size: 13.sp),
-                  keyboardType: TextInputType.number,
                 ),
-                Gap(5),
+                Gap(10),
+
                 CostumTextField(
                   labelText: 'Phone Number',
-                  height: 46.h,
-                  width: 260.w,
+                  width: 266.w,
                   controller: _numberController,
                 ),
               ],
             ),
-            Gap(10),
+            Gap(16),
             CostumTextField(
-              hintText: 'Your Passwoed',
-              width: double.infinity,
-              height: 46.h,
+              controller: _passwordController,
+              hintText: 'Create your password ',
+              suffixIcon: Icon(
+                Icons.remove_red_eye,
+                color: AppColors.labelColor,
+              ),
+            ),
+            Gap(20),
+            CostumTextField(
+              controller: _confirmPasswordController,
+              hintText: 'Confirm  Password',
               suffixIcon: Icon(
                 Icons.visibility_off,
                 color: AppColors.labelColor,
               ),
-              controller: _passwordController,
-              keyboardType: TextInputType.number,
             ),
-            Gap(10),
-
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (c) => ForgetPassword()),
-                  );
-                },
-                child: Text(
-                  'Forget Password?',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 12.sp,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-            Gap(55),
-
+            Gap(20),
             CostumButton(
-              buttonText: 'Login',
-              width: 260.w,
-              height: 65.h,
-              bordersRadius: 30.r,
+              buttonText: 'Next',
+
               buttonColor: AppColors.buttonColor,
+              width: 268.w,
+              height: 65.h,
+              bordersRadius: 60.r,
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (c) => Root()),
+                  MaterialPageRoute(builder: (c) => VerifyView()),
                 );
               },
             ),
@@ -134,12 +112,12 @@ class _LoginViewState extends State<LoginView> {
               onTap: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (c) => CreateAccountView()),
+                  MaterialPageRoute(builder: (c) => LoginView()),
                 );
               },
               child: RichText(
                 text: TextSpan(
-                  text: "Don't have an account? ",
+                  text: "Have an account? ",
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 13.sp,
@@ -148,12 +126,12 @@ class _LoginViewState extends State<LoginView> {
 
                   children: [
                     TextSpan(
-                      text: "Register",
+                      text: "Login",
                       style: TextStyle(
                         color: AppColors.buttonColor,
                         fontSize: 13.sp,
                         fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -167,3 +145,4 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+// verify

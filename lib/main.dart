@@ -1,3 +1,6 @@
+import 'package:cosmetics/futures/views/cart/cart_view.dart';
+import 'package:cosmetics/futures/views/category/category_view.dart';
+import 'package:cosmetics/futures/views/home/home_view.dart';
 import 'package:cosmetics/splash.dart';
 
 import 'package:flutter/material.dart';
@@ -20,7 +23,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  @override
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -29,7 +32,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return MaterialApp(
           theme: ThemeData(splashColor: Colors.transparent),
-          home: const Splash(),
+          home: Splash(),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
         );
