@@ -1,9 +1,11 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/futures/views/cart/cart_view.dart';
-import 'package:cosmetics/futures/views/category/category_view.dart';
-import 'package:cosmetics/futures/views/home/home_view.dart';
+import 'package:cosmetics/views/cart/cart.dart';
+import 'package:cosmetics/views/category/category.dart';
+import 'package:cosmetics/views/home/home.dart';
+import 'package:cosmetics/views/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Root extends StatefulWidget {
   const Root({super.key});
@@ -15,7 +17,12 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = const [HomeView(), CategoryView(), CartView()];
+  final List<Widget> pages = const [
+    HomeView(),
+    CategoryView(),
+    CartView(),
+    ProfileView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +52,10 @@ class _RootState extends State<Root> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavItem(Icons.home_outlined, 0),
-                  _buildNavItem(Icons.grid_view, 1),
-                  _buildNavItem(Icons.shopping_cart_outlined, 2),
-                  _buildNavItem(Icons.person_outline, 3),
+                  _buildNavItem('assets/svgs/home_icon.svg', 0),
+                  _buildNavItem('assets/svgs/categories.svg', 1),
+                  _buildNavItem('assets/svgs/my_cart.svg', 2),
+                  _buildNavItem('assets/svgs/profile.svg', 3),
                 ],
               ),
             ),
@@ -58,7 +65,7 @@ class _RootState extends State<Root> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, int index) {
+  Widget _buildNavItem(String iconPath, int index) {
     final bool isSelected = selectedIndex == index;
 
     return GestureDetector(
@@ -67,10 +74,11 @@ class _RootState extends State<Root> {
           selectedIndex = index;
         });
       },
-      child: Icon(
-        icon,
-        size: 28,
+      child: SvgPicture.asset(
+        iconPath,
         color: isSelected ? AppColors.buttonColor : Colors.grey,
+        width: 20.w,
+        height: 20.h,
       ),
     );
   }

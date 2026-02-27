@@ -1,28 +1,28 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/futures/views/auth/verify_view.dart';
+import 'package:cosmetics/views/auth/verify.dart';
 import 'package:cosmetics/shared/costum_button.dart';
 import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
+class ForgetPasswordView extends StatefulWidget {
+  const ForgetPasswordView({super.key});
 
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<ForgetPasswordView> createState() => _ForgetPasswordState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _subNumberController = TextEditingController();
+class _ForgetPasswordState extends State<ForgetPasswordView> {
+  final _phoneController = TextEditingController();
+  final _subNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
       body: Column(
         children: [
-          Gap(60),
+          Gap(40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
@@ -49,11 +49,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ],
             ),
           ),
-          Gap(60),
+          Gap(40),
+
           Center(
             child: Image.asset(
               'assets/images/splash_image.png',
-              height: 57.sp,
+              height: 62.sp,
               width: 67.sp,
             ),
           ),
@@ -63,23 +64,23 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             'Forget Password',
             style: TextStyle(
               fontSize: 24.sp,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.bold,
               color: AppColors.primaryColor,
             ),
           ),
-          Gap(30),
+          Gap(40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60.0),
             child: Text(
               'Please enter your phone number below            \n  to recovery your password.',
               style: TextStyle(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.w300,
-                color: AppColors.primaryColor,
+                fontWeight: FontWeight.w400,
+                color: AppColors.labelColor,
               ),
             ),
           ),
-          Gap(62),
+          Gap(45),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Row(

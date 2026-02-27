@@ -1,6 +1,6 @@
-import 'package:cosmetics/futures/views/cart/cart_view.dart';
-import 'package:cosmetics/futures/views/category/category_view.dart';
-import 'package:cosmetics/futures/views/home/home_view.dart';
+import 'package:cosmetics/views/cart/cart.dart';
+import 'package:cosmetics/views/category/category.dart';
+import 'package:cosmetics/views/home/home.dart';
 import 'package:cosmetics/splash.dart';
 
 import 'package:flutter/material.dart';

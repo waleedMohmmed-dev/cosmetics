@@ -35,11 +35,11 @@ class _SplashState extends State<Splash> {
             child: Image.asset(
               'assets/images/splash_image.png',
               width: 200.w,
-              height: 165.h,
+              height: 200.h,
             ),
           ),
-          Gap(16),
-          Image.asset('assets/images/vector.png', width: 180.w),
+          Gap(17),
+          Image.asset('assets/images/vector.png', width: 120.w, height: 46.h),
         ],
       ),
     );

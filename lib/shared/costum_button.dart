@@ -1,6 +1,7 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 class CostumButton extends StatelessWidget {
   final String? buttonText;
@@ -54,9 +55,12 @@ class CostumButton extends StatelessWidget {
             style: TextStyle(
               color: textColor ?? Colors.white,
               fontWeight: FontWeight.w600,
-              fontSize: fontSize ?? 16.sp,
+              fontSize: fontSize ?? 15.sp,
             ),
           ),
+          Gap(10.w),
+          icon ?? const SizedBox.shrink(),
+          tralingIcon ?? const SizedBox.shrink(),
         ],
       ),
     );

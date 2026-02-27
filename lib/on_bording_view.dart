@@ -1,4 +1,4 @@
-import 'package:cosmetics/futures/views/auth/login_view.dart';
+import 'package:cosmetics/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -67,7 +67,11 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
             child: Center(
               child: Text(
                 'Skip',
-                style: TextStyle(fontSize: 16.sp, color: Color(0xff434C6D)),
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xff434C6D),
+                ),
               ),
             ),
           ),
@@ -117,7 +121,7 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
                   buttonText: page['buttonText'],
                   bordersRadius: 58.r,
                   width: 268.w,
-                  height: 64.h,
+                  height: 65.h,
                   onTap: nextPage,
                 ),
         ],

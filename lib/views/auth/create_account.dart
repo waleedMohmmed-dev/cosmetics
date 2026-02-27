@@ -1,6 +1,7 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/futures/views/auth/login_view.dart';
-import 'package:cosmetics/futures/views/auth/verify_view.dart';
+import 'package:cosmetics/views/auth/login.dart';
+import 'package:cosmetics/views/auth/verify.dart';
+
 import 'package:cosmetics/shared/costum_button.dart';
 import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,12 @@ class CreateAccountView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<CreateAccountView> {
-  final TextEditingController nameContoller = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _subNamburController = TextEditingController();
-
-  final TextEditingController _numberController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _subNumberController = TextEditingController();
+  final _numberController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ class _RegisterViewState extends State<CreateAccountView> {
             Center(
               child: Image.asset(
                 'assets/images/splash_image.png',
-                height: 57.sp,
+                height: 62.sp,
                 width: 67.sp,
               ),
             ),
@@ -50,22 +49,20 @@ class _RegisterViewState extends State<CreateAccountView> {
                 fontFamily: 'Montserrat',
               ),
             ),
-            Gap(50),
-            CostumTextField(labelText: 'Your Name', controller: nameContoller),
+            Gap(70),
+            CostumTextField(labelText: 'Your Name', controller: nameController),
             Gap(20),
             CostumTextField(labelText: 'Email', controller: _emailController),
             Gap(20),
-
             Row(
               children: [
                 CostumTextField(
-                  labelText: '+20 ',
+                  labelText: '+20',
                   width: 72.w,
                   height: 46.h,
-                  controller: _subNamburController,
+                  controller: _subNumberController,
                 ),
                 Gap(10),
-
                 CostumTextField(
                   labelText: 'Phone Number',
                   width: 266.w,
@@ -76,7 +73,7 @@ class _RegisterViewState extends State<CreateAccountView> {
             Gap(16),
             CostumTextField(
               controller: _passwordController,
-              hintText: 'Create your password ',
+              hintText: 'Create your password',
               suffixIcon: Icon(
                 Icons.remove_red_eye,
                 color: AppColors.labelColor,
@@ -85,29 +82,30 @@ class _RegisterViewState extends State<CreateAccountView> {
             Gap(20),
             CostumTextField(
               controller: _confirmPasswordController,
-              hintText: 'Confirm  Password',
+              hintText: 'Confirm Password',
               suffixIcon: Icon(
                 Icons.visibility_off,
                 color: AppColors.labelColor,
               ),
             ),
-            Gap(20),
+            Gap(16),
             CostumButton(
               buttonText: 'Next',
-
               buttonColor: AppColors.buttonColor,
               width: 268.w,
               height: 65.h,
               bordersRadius: 60.r,
               onTap: () {
+                // هنا نمرر isRegister = true
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (c) => VerifyView()),
+                  MaterialPageRoute(
+                    builder: (c) => VerifyView(isRegister: true),
+                  ),
                 );
               },
             ),
             Spacer(),
-
             GestureDetector(
               onTap: () {
                 Navigator.pushReplacement(
@@ -123,7 +121,6 @@ class _RegisterViewState extends State<CreateAccountView> {
                     fontSize: 13.sp,
                     fontFamily: 'Montserrat',
                   ),
-
                   children: [
                     TextSpan(
                       text: "Login",
@@ -145,4 +142,3 @@ class _RegisterViewState extends State<CreateAccountView> {
     );
   }
 }
-// verify

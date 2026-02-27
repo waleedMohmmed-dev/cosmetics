@@ -1,5 +1,5 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/futures/views/home/widget/costum_textfeild.dart';
+import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,20 +33,3 @@ class _SearchFeildState extends State<SearchFeild> {
     );
   }
 }
-
-// onChanged:  (value) {
-                //   final q = value.toLowerCase();
-                //   setState(() {
-                //     categories = categories.where((element) => element.toLowerCase().startsWith(q)).toList();
-                //   });
-                // },
-                /////
-                // onChanged: (value) {
-                //   final q = value.toLowerCase();
-                //   setState(() {
-                //     product = allProducts?.where(value(p)=>p.name.toLowerCase().startWith(
-                //       q
-                //     )
-                //     ).toList();
-                //   });
-                // },

@@ -1,6 +1,6 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/futures/views/auth/forget_password.dart';
-import 'package:cosmetics/futures/views/auth/create_account_view.dart';
+import 'package:cosmetics/views/auth/forget_password.dart';
+import 'package:cosmetics/views/auth/create_account.dart';
 
 import 'package:cosmetics/root.dart';
 import 'package:cosmetics/shared/costum_button.dart';
@@ -17,10 +17,10 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _subNamburController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _subNamburController = TextEditingController();
 
-  final TextEditingController _numberController = TextEditingController();
+  final _numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +33,11 @@ class _LoginViewState extends State<LoginView> {
             Center(
               child: Image.asset(
                 'assets/images/login_logo.png',
-                width: 280.w,
+                width: 284.w,
                 height: 227.h,
               ),
             ),
-            Gap(20),
+            Gap(25),
             Text(
               'Login Now',
               style: TextStyle(
@@ -52,20 +52,19 @@ class _LoginViewState extends State<LoginView> {
               'Please enter the details below to continue',
               style: TextStyle(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.w300,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'Montserrat',
                 color: AppColors.primaryColor,
               ),
             ),
             Gap(25),
 
-            /// text fields
             Row(
               children: [
                 CostumTextField(
                   hintText: '+20',
                   height: 46.h,
-                  width: 78.w,
+                  width: 72.w,
                   controller: _subNamburController,
                   // suffixIcon: Icon(Icons.arrow_drop_down, size: 13.sp),
                   keyboardType: TextInputType.number,
@@ -79,7 +78,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ],
             ),
-            Gap(10),
+            Gap(7),
             CostumTextField(
               hintText: 'Your Passwoed',
               width: double.infinity,
@@ -91,7 +90,7 @@ class _LoginViewState extends State<LoginView> {
               controller: _passwordController,
               keyboardType: TextInputType.number,
             ),
-            Gap(10),
+            Gap(11),
 
             Align(
               alignment: Alignment.centerRight,
@@ -99,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (c) => ForgetPassword()),
+                    MaterialPageRoute(builder: (c) => ForgetPasswordView()),
                   );
                 },
                 child: Text(
@@ -113,7 +112,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            Gap(55),
+            Gap(43),
 
             CostumButton(
               buttonText: 'Login',
