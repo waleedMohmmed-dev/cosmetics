@@ -60,12 +60,8 @@ class CheckoutView extends StatelessWidget {
                 width: 390.w,
                 height: 690.h,
                 decoration: BoxDecoration(
-                  color: const Color.from(
-                    alpha: 1,
-                    red: 0.835,
-                    green: 0.98,
-                    blue: 1,
-                  ),
+                  color: Color(0xff29D3DA).withValues(alpha: .11),
+
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -95,7 +91,7 @@ class CheckoutView extends StatelessWidget {
 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.cyanAccent, width: 1.5),
+                    border: Border.all(color: Color(0xff73B9BB), width: 1.5),
                   ),
                   child: Row(
                     children: [
@@ -163,7 +159,7 @@ class CheckoutView extends StatelessWidget {
 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.cyanAccent, width: 1.5),
+                    border: Border.all(color: Color(0xff73B9BB), width: 1.5),
                   ),
                   child: Row(
                     children: [
@@ -209,7 +205,7 @@ class CheckoutView extends StatelessWidget {
 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: Colors.cyanAccent, width: 1.5),
+                    border: Border.all(color: Color(0xff73B9BB), width: 1.5),
                   ),
                   child: Row(
                     children: [
@@ -348,7 +344,7 @@ class CheckoutView extends StatelessWidget {
                 left: 35,
                 right: 35,
                 top: 570,
-                child: Divider(thickness: 2, color: Colors.black),
+                child: Divider(thickness: 1, color: Color(0xff73B9BB)),
               ),
 
               /// divider
