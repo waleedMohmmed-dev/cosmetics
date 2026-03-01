@@ -1,4 +1,5 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/views/auth/create_password.dart';
 import 'package:cosmetics/views/auth/verify.dart';
 import 'package:cosmetics/shared/costum_button.dart';
 import 'package:cosmetics/shared/costum_textfeild.dart';

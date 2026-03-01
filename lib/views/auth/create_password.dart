@@ -4,6 +4,7 @@ import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:cosmetics/shared/costum_dailog.dart';
 import 'package:cosmetics/views/auth/login.dart';
 import 'package:cosmetics/root.dart';
+import 'package:cosmetics/views/auth/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -77,34 +78,7 @@ class CreatePasswordView extends StatelessWidget {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (_) {
-                    return Dialog(
-                      child: CostumDailog(
-                        title: isRegister
-                            ? 'Account Activated!'
-                            : 'Password Changed!',
-                        description: isRegister
-                            ? 'Congratulations! Your account has been successfully activated'
-                            : 'Your new password has been set successfully.',
-                        buttonText: isRegister ? 'Go to home' : 'Login Now',
-                        onTap: () {
-                          Navigator.pop(context);
-
-                          if (isRegister) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (_) => Root()),
-                            );
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (_) => LoginView()),
-                            );
-                          }
-                        },
-                      ),
-                    );
-                  },
+                  builder: (_) => const Dialog(child: CostumDailog()),
                 );
               },
             ),

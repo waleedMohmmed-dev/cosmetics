@@ -96,7 +96,6 @@ class _RegisterViewState extends State<CreateAccountView> {
               height: 65.h,
               bordersRadius: 60.r,
               onTap: () {
-                // هنا نمرر isRegister = true
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -108,9 +107,11 @@ class _RegisterViewState extends State<CreateAccountView> {
             Spacer(),
             GestureDetector(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (c) => LoginView()),
+                  MaterialPageRoute(
+                    builder: (_) => const VerifyView(isRegister: true),
+                  ),
                 );
               },
               child: RichText(
