@@ -6,8 +6,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
-class CartView extends StatelessWidget {
-  const CartView({super.key});
+class CartView extends StatefulWidget {
+  CartView({super.key});
+
+  @override
+  State<CartView> createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
+  late List<int> quantitiys;
+
+  @override
+  void initState() {
+    super.initState();
+    quantitiys = List<int>.filled(10, 1);
+  }
+
+  void onAdd(int index) {
+    setState(() {
+      quantitiys[index]++;
+    });
+  }
+
+  void onMinus(int index) {
+    setState(() {
+      if (quantitiys[index] > 1) {
+        quantitiys[index]--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +55,6 @@ class CartView extends StatelessWidget {
                 ),
               ),
               Gap(100),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: SvgPicture.asset(
@@ -41,7 +67,6 @@ class CartView extends StatelessWidget {
           ),
         ],
       ),
-
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
@@ -62,11 +87,16 @@ class CartView extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
-                itemBuilder: (contect, index) {
-                  return _item();
+                itemBuilder: (context, index) {
+                  return _item(
+                    number: quantitiys[index],
+                    onAdd: () => onAdd(index),
+                    onMinus: () => onMinus(index),
+                  );
                 },
               ),
             ),
+            Gap(140),
           ],
         ),
       ),
@@ -74,7 +104,11 @@ class CartView extends StatelessWidget {
   }
 }
 
-Widget _item() {
+Widget _item({
+  required int number,
+  required Function() onAdd,
+  required Function() onMinus,
+}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
@@ -87,7 +121,6 @@ Widget _item() {
               width: 102.w,
               height: 102.h,
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
@@ -102,9 +135,7 @@ Widget _item() {
                       color: AppColors.primaryColor,
                     ),
                   ),
-
                   Gap(7),
-
                   Text(
                     'Ultra rich mascara for lashes',
                     style: TextStyle(
@@ -114,9 +145,7 @@ Widget _item() {
                       color: AppColors.primaryColor,
                     ),
                   ),
-
                   Gap(15),
-
                   Text(
                     '350 EGP',
                     style: TextStyle(
@@ -126,7 +155,6 @@ Widget _item() {
                       color: AppColors.primaryColor,
                     ),
                   ),
-
                   Gap(10),
                 ],
               ),
@@ -134,7 +162,6 @@ Widget _item() {
           ],
         ),
       ),
-
       Container(
         width: 142.w,
         height: 42.h,
@@ -144,17 +171,14 @@ Widget _item() {
         ),
         child: Row(
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.minimize,
-                size: 30.sp,
-                color: Color(0xff434C6D82),
-              ),
+            Gap(13),
+            InkWell(
+              onTap: onMinus,
+              child: SvgPicture.asset('assets/svgs/minus.svg', width: 20.w),
             ),
-            Gap(20),
+            Gap(32),
             Text(
-              '1',
+              number.toString(),
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -162,11 +186,18 @@ Widget _item() {
               ),
             ),
             Spacer(),
-            IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+            InkWell(
+              onTap: onAdd,
+              child: SvgPicture.asset(
+                'assets/svgs/add.svg',
+                width: 16.w,
+                height: 15.h,
+              ),
+            ),
+            Gap(15),
           ],
         ),
       ),
-
       Divider(thickness: 1, color: Color(0xffB3B3C180)),
     ],
   );

@@ -1,4 +1,5 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/views/auth/login.dart';
 import 'package:cosmetics/views/chekout/checkout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,12 +87,20 @@ class ProfileView extends StatelessWidget {
               children: [
                 Icon(Icons.logout, color: Colors.red.shade700),
                 Gap(10),
-                Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.red.shade700,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w700,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (c) => LoginView()),
+                    );
+                  },
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.red.shade700,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ],
@@ -106,7 +115,7 @@ class ProfileView extends StatelessWidget {
 Widget _item(VoidCallback onTap, String text, String iconPath) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 13.w),
-    child: GestureDetector(
+    child: InkWell(
       onTap: onTap,
       child: Row(
         children: [

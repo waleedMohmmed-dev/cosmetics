@@ -35,7 +35,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.2.3
   gap: ^3.0.1
+  google_maps_flutter: ^2.14.2
   pin_code_fields: ^8.0.1
+ 
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -57,7 +60,7 @@ flutter:
     - assets/
     - assets/svgs/
     - assets/images/
-    
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

@@ -1,19 +1,32 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
 import 'package:cosmetics/shared/costum_button.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CheckoutView extends StatelessWidget {
   const CheckoutView({super.key});
+
+  /// Open Maps methodd
+  Future<void> _openMaps() async {
+    final address = 'Mansoura,14 Porsaid St';
+    final query = Uri.encodeComponent(address);
+    final url = 'https://www.google.com/maps/search/?api=1&query=$query';
+
+    /// if the phone can open link
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Can not open The Mpas Soryy Bro .';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
-
       body: Column(
         children: [
           Gap(80),
@@ -28,7 +41,6 @@ class CheckoutView extends StatelessWidget {
                     color: Color(0xff1010100D).withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
-
                   child: IconButton(
                     icon: Icon(
                       Icons.arrow_back_ios,
@@ -51,9 +63,8 @@ class CheckoutView extends StatelessWidget {
                 ),
               ],
             ),
-          ), //
-          Gap(19),
-
+          ),
+          // Gap(19),
           Stack(
             children: [
               Container(
@@ -61,7 +72,6 @@ class CheckoutView extends StatelessWidget {
                 height: 690.h,
                 decoration: BoxDecoration(
                   color: Color(0xff29D3DA).withValues(alpha: .11),
-
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
@@ -71,7 +81,6 @@ class CheckoutView extends StatelessWidget {
               Positioned(
                 top: 15,
                 left: 27,
-
                 child: Text(
                   'Delivery to',
                   style: TextStyle(
@@ -88,7 +97,6 @@ class CheckoutView extends StatelessWidget {
                 child: Container(
                   width: 309.w,
                   height: 84.h,
-
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(color: Color(0xff73B9BB), width: 1.5),
@@ -97,10 +105,14 @@ class CheckoutView extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Image.asset(
-                          'assets/images/map.png',
-                          width: 96.w,
-                          height: 60.h,
+
+                        child: GestureDetector(
+                          onTap: _openMaps,
+                          child: Image.asset(
+                            'assets/images/map.png',
+                            width: 96.w,
+                            height: 60.h,
+                          ),
                         ),
                       ),
                       Gap(1),
@@ -129,7 +141,6 @@ class CheckoutView extends StatelessWidget {
                         ],
                       ),
                       Gap(15),
-
                       Icon(CupertinoIcons.chevron_down, color: Colors.red),
                     ],
                   ),
@@ -156,7 +167,6 @@ class CheckoutView extends StatelessWidget {
                 child: Container(
                   width: 309.w,
                   height: 57.h,
-
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(color: Color(0xff73B9BB), width: 1.5),
@@ -188,7 +198,6 @@ class CheckoutView extends StatelessWidget {
                         ],
                       ),
                       Gap(116),
-
                       Icon(CupertinoIcons.chevron_down, color: Colors.red),
                     ],
                   ),
@@ -202,7 +211,6 @@ class CheckoutView extends StatelessWidget {
                 child: Container(
                   width: 309.w,
                   height: 57.h,
-
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(color: Color(0xff73B9BB), width: 1.5),
@@ -239,7 +247,6 @@ class CheckoutView extends StatelessWidget {
                         height: 30.h,
                         buttonColor: AppColors.buttonColor,
                         buttonText: 'Apply',
-
                         bordersRadius: 20.r,
                         onTap: () {},
                       ),
@@ -269,7 +276,6 @@ class CheckoutView extends StatelessWidget {
                   ),
                 ),
               ),
-
               Positioned(
                 top: 470,
                 left: 35,
@@ -311,7 +317,6 @@ class CheckoutView extends StatelessWidget {
                   ],
                 ),
               ),
-
               Positioned(
                 top: 540,
                 left: 35,
@@ -362,9 +367,7 @@ class CheckoutView extends StatelessWidget {
                         color: AppColors.primaryColor,
                       ),
                     ),
-
-                    //
-                    Gap(180),
+                    // Gap(180),
                     Text(
                       '16.100 EGP',
                       style: TextStyle(
@@ -388,7 +391,6 @@ class CheckoutView extends StatelessWidget {
                   height: 65.h,
                   bordersRadius: 60.r,
                   onTap: () {},
-
                   icon: Image.asset(
                     'assets/images/cart_suffixicon.png',
                     width: 20.w,

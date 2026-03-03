@@ -1,6 +1,5 @@
 import 'package:cosmetics/core/constans/app_colors.dart';
 
-import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:cosmetics/shared/search_future.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,8 +33,8 @@ class _CategoryViewState extends State<CategoryView> {
               ),
             ),
           ),
-          Gap(24),
 
+          Gap(24),
           SearchFuture(
             hintText: 'Search',
             controller: _searchForCategoryController,
@@ -52,6 +51,7 @@ class _CategoryViewState extends State<CategoryView> {
               },
             ),
           ),
+          Gap(100),
         ],
       ),
     );

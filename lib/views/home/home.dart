@@ -20,60 +20,62 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
-      body: Column(
-        children: [
-          Gap(70),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: Row(
-              children: [
-                SearchFuture(
-                  hintText: 'Search',
-                  controller: _searchController,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Gap(70),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Row(
+                children: [
+                  SearchFuture(
+                    hintText: 'Search',
+                    controller: _searchController,
 
-                  width: 340.w,
-                  height: 50.h,
-                  suffixIcon: Icon(Icons.search, color: Color(0xff8E8EA9)),
-                ),
-              ],
+                    width: 340.w,
+                    height: 50.h,
+                    suffixIcon: Icon(Icons.search, color: Color(0xff8E8EA9)),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Gap(9),
+            Gap(9),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: Container(
-              width: 360.w,
-              height: 317.h,
-              child: Image.asset(
-                'assets/images/top_head_line_home.png',
-                width: 364.w,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Container(
+                width: 360.w,
                 height: 317.h,
-              ),
-            ),
-          ),
-          Gap(10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Top rated products',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primaryColor,
+                child: Image.asset(
+                  'assets/images/top_head_line_home.png',
+                  width: 364.w,
+                  height: 317.h,
                 ),
               ),
             ),
-          ),
+            Gap(10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Top rated products',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
+            ),
 
-          Expanded(
-            child: Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 17),
               child: GridView.builder(
                 itemCount: 4,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 100 / 146,
@@ -85,8 +87,8 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

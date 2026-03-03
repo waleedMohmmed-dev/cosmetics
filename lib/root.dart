@@ -17,11 +17,11 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = const [
-    HomeView(),
-    CategoryView(),
+  final List<Widget> pages = [
+    const HomeView(),
+    const CategoryView(),
     CartView(),
-    ProfileView(),
+    const ProfileView(),
   ];
 
   @override
