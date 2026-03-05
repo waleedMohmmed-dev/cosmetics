@@ -1,32 +1,32 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
 
-import 'package:cosmetics/shared/search_future.dart';
+import 'package:cosmetics/core/ui/app_future.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class CategoryView extends StatefulWidget {
-  const CategoryView({super.key});
+class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({super.key});
 
   @override
-  State<CategoryView> createState() => _CategoryViewState();
+  State<CategoriesPage> createState() => _CategoriesPageState();
 }
 
-class _CategoryViewState extends State<CategoryView> {
+class _CategoriesPageState extends State<CategoriesPage> {
   final _searchForCategoryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
-
       body: Column(
         children: [
-          Gap(80),
+          80.ph,
+
           Center(
             child: Text(
               'Categories',
               style: TextStyle(
-                fontFamily: 'Montserrat',
                 fontSize: 24.sp,
                 color: AppColors.primaryColor,
                 fontWeight: FontWeight.bold,
@@ -35,7 +35,7 @@ class _CategoryViewState extends State<CategoryView> {
           ),
 
           Gap(24),
-          SearchFuture(
+          AppInputFuture(
             hintText: 'Search',
             controller: _searchForCategoryController,
             width: 340.w,
@@ -51,7 +51,7 @@ class _CategoryViewState extends State<CategoryView> {
               },
             ),
           ),
-          Gap(100),
+          100.ph,
         ],
       ),
     );
@@ -66,8 +66,8 @@ Widget _item() {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/images/category_item.png',
+            AppImage(
+              path: 'assets/images/category_item.png',
               width: 64.w,
               height: 69.h,
             ),
@@ -76,7 +76,7 @@ Widget _item() {
               'Bundles',
               style: TextStyle(
                 fontSize: 14.sp,
-                fontFamily: 'Montserrat',
+
                 fontWeight: FontWeight.w400,
                 color: AppColors.primaryColor,
               ),

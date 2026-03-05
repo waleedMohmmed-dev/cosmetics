@@ -1,15 +1,18 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/root.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
+import 'package:cosmetics/views/home/view.dart';
 import 'package:cosmetics/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
-import 'package:cosmetics/shared/costum_button.dart';
 
-class CostumDailog extends StatelessWidget {
+import 'package:cosmetics/core/ui/app_button.dart';
+
+class AppDailog extends StatelessWidget {
   final bool isFromCreateAccount;
 
-  const CostumDailog({super.key, this.isFromCreateAccount = false});
+  const AppDailog({super.key, this.isFromCreateAccount = false});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +26,15 @@ class CostumDailog extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          // mainAxisSize: MainAxisSize.max,
           children: [
-            Image.asset(
-              'assets/images/dialog_logo.png',
+            AppImage(
+              path: 'assets/images/dialog_logo.png',
               width: 100.w,
               height: 100.h,
             ),
-            Gap(26),
+            26.ph,
+
             Text(
               isFromCreateAccount ? 'Account Activated!' : 'Password Created!',
 
@@ -38,16 +42,15 @@ class CostumDailog extends StatelessWidget {
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.primaryColor,
-                fontFamily: 'Montserrat',
               ),
             ),
-            Gap(7),
+            7.ph,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 isFromCreateAccount
                     ? 'Congratulations! Your account has been successfully activated'
-                    : 'Congratulations! Your password \nhas been successfully created',
+                    : 'Congratulations! Your password has been successfully created',
                 style: TextStyle(
                   fontSize: 16.sp,
                   color: AppColors.labelColor,
@@ -56,28 +59,27 @@ class CostumDailog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Gap(23),
-            CostumButton(
+            23.ph,
+            AppButton(
               buttonText: isFromCreateAccount
                   ? 'Go To Home'
                   : 'Return To Login',
-              buttonColor: AppColors.buttonColor,
-              bordersRadius: 60,
-              width: 260.w,
-              height: 60.h,
+
               onTap: () {
                 if (isFromCreateAccount) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => Root()),
-                    (route) => false,
-                  );
+                  goTo(page: HomeView(), canPop: false);
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(builder: (_) => MainVeiw()),
+                  //   (route) => false,
+                  // );
                 } else {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => LoginView()),
-                    (route) => false,
-                  );
+                  goTo(page: LoginView());
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(builder: (_) => LoginView()),
+                  //   (route) => false,
+                  // );
                 }
               },
             ),

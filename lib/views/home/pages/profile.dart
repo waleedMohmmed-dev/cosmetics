@@ -1,26 +1,26 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/views/auth/login.dart';
-import 'package:cosmetics/views/chekout/checkout.dart';
+import 'package:cosmetics/views/home/pages/checkout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Column(
         children: [
           Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: [
-              Image.asset(
-                'assets/images/top_head_profile.png',
+              AppImage(
+                path: 'assets/images/top_head_profile.png',
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -43,7 +43,7 @@ class ProfileView extends StatelessWidget {
             ],
           ),
 
-          Gap(60),
+          60.ph,
 
           Text(
             'Sara Samer Talaat',
@@ -54,45 +54,43 @@ class ProfileView extends StatelessWidget {
             ),
           ),
 
-          Gap(40),
+          40.ph,
 
-          _item(() {}, 'Edit Info', 'assets/svgs/edit_info.svg'),
+          _item(() {}, 'Edit Info', 'assets/icons/edit_info.svg'),
 
-          Gap(42),
+          40.ph,
 
           _item(
             () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (c) => const CheckoutView()),
-              );
+              goTo(page: CheckoutPage());
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (c) => const CheckoutPage()),
+              // );
             },
             'Order History',
-            'assets/svgs/order_history.svg',
+            'assets/icons/order_history.svg',
           ),
-          Gap(42),
+          42.ph,
 
-          _item(() {}, 'Wallet', 'assets/svgs/wallet.svg'),
-          Gap(42),
+          _item(() {}, 'Wallet', 'assets/icons/wallet.svg'),
+          42.ph,
 
-          _item(() {}, 'Settings', 'assets/svgs/settings.svg'),
-          Gap(42),
+          _item(() {}, 'Settings', 'assets/icons/settings.svg'),
+          42.ph,
 
-          _item(() {}, 'Voucher', 'assets/svgs/voucher.svg'),
-          Gap(42),
+          _item(() {}, 'Voucher', 'assets/icons/voucher.svg'),
+          42.ph,
 
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 13.w),
             child: Row(
               children: [
                 Icon(Icons.logout, color: Colors.red.shade700),
-                Gap(10),
+                10.pw,
                 InkWell(
                   onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (c) => LoginView()),
-                    );
+                    goTo(page: LoginView(), canPop: false);
                   },
                   child: Text(
                     'Logout',
@@ -119,14 +117,13 @@ Widget _item(VoidCallback onTap, String text, String iconPath) {
       onTap: onTap,
       child: Row(
         children: [
-          SvgPicture.asset(
-            iconPath,
+          AppImage(
+            path: iconPath,
             width: 17.w,
             height: 17.h,
             color: AppColors.primaryColor,
           ),
-
-          Gap(10),
+          10.pw,
           Text(
             text,
             style: TextStyle(

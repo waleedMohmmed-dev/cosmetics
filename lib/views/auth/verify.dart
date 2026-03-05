@@ -1,13 +1,14 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/root.dart';
-import 'package:cosmetics/shared/costum_button.dart';
-import 'package:cosmetics/shared/costum_dailog.dart';
+import 'dart:async';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
+import 'package:cosmetics/core/ui/app_dailog.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/views/auth/create_password.dart';
-import 'package:cosmetics/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:gap/gap.dart';
 
 class VerifyView extends StatefulWidget {
   final bool isRegister;
@@ -21,14 +22,53 @@ class _VerifyViewState extends State<VerifyView> {
   final formKey = GlobalKey<FormState>();
   late TextEditingController pinCodeController;
 
+  Timer? _timer;
+
+  int _totalSeconds = 40;
+  int _remaining = 40;
+
+  bool _canResend = false;
+
   @override
   void initState() {
     super.initState();
     pinCodeController = TextEditingController();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _remaining = _totalSeconds;
+    _canResend = false;
+
+    _timer?.cancel();
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (_remaining <= 0) {
+        _timer?.cancel();
+        setState(() {
+          _canResend = true;
+        });
+      } else {
+        setState(() {
+          _remaining--;
+        });
+      }
+    });
+  }
+
+  void _restart() {
+    _startTimer();
+  }
+
+  String get _formattedTime {
+    final m = (_remaining ~/ 60).toString().padLeft(2, '0');
+    final s = (_remaining % 60).toString().padLeft(2, '0');
+    return '$m:$s';
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     pinCodeController.dispose();
     super.dispose();
   }
@@ -36,35 +76,32 @@ class _VerifyViewState extends State<VerifyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Column(
         children: [
-          Gap(120),
+          100.ph,
           Center(
-            child: Image.asset(
-              'assets/images/splash_image.png',
-              height: 67.sp,
-              width: 62.sp,
+            child: AppImage(
+              path: 'assets/images/splash_image.png',
+              height: 67.h,
+              width: 62.w,
             ),
           ),
-          Gap(40),
+          40.ph,
           Text(
             'Verify Code',
             style: TextStyle(
               fontSize: 22.sp,
               fontWeight: FontWeight.bold,
               color: AppColors.primaryColor,
-              fontFamily: 'Montserrat',
             ),
           ),
-          Gap(40),
+          40.ph,
           RichText(
             text: TextSpan(
               text: 'We just sent a 4-digit verification code to\n \n  ',
               style: TextStyle(
                 color: AppColors.primaryColor,
                 fontSize: 14.sp,
-                fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w400,
               ),
               children: [
@@ -73,7 +110,6 @@ class _VerifyViewState extends State<VerifyView> {
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 14.sp,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -82,14 +118,13 @@ class _VerifyViewState extends State<VerifyView> {
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 14.sp,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w400,
                   ),
                 ),
               ],
             ),
           ),
-          Gap(40),
+          40.ph,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 13),
             child: Align(
@@ -98,14 +133,13 @@ class _VerifyViewState extends State<VerifyView> {
                 'Edit the number',
                 style: TextStyle(
                   fontSize: 14.sp,
-                  fontFamily: 'Montserrat',
                   color: AppColors.buttonColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ),
-          Gap(20),
+          20.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 44),
             child: PinCodeTextField(
@@ -119,7 +153,6 @@ class _VerifyViewState extends State<VerifyView> {
                 color: AppColors.primaryColor,
                 fontSize: 22.sp,
                 fontWeight: FontWeight.w600,
-                fontFamily: 'Montserrat',
               ),
               pinTheme: PinTheme(
                 selectedBorderWidth: 1,
@@ -138,65 +171,57 @@ class _VerifyViewState extends State<VerifyView> {
               onCompleted: (value) {},
             ),
           ),
-          Gap(43),
+          43.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'Didn’t receive a code?',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 12.sp,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w500,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: " Resend",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 12.sp,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w500,
-                        ),
+                GestureDetector(
+                  onTap: _canResend ? _restart : null,
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Didn’t receive a code?',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
                       ),
-                    ],
+                      children: [
+                        TextSpan(
+                          text: "Resend",
+                          style: TextStyle(
+                            color: _canResend ? Colors.red : Colors.grey,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Text(
-                  '0:36',
+                  _formattedTime,
                   style: TextStyle(
                     fontSize: 12.sp,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
           ),
-          Gap(113),
-          CostumButton(
-            width: 268.sp,
-            height: 65.h,
+          113.ph,
+          AppButton(
             buttonText: 'Done',
-            bordersRadius: 60,
-            buttonColor: AppColors.buttonColor,
             onTap: () {
               if (widget.isRegister) {
                 showDialog(
                   context: context,
-                  builder: (_) => const Dialog(
-                    child: CostumDailog(isFromCreateAccount: true),
-                  ),
+                  builder: (_) =>
+                      const Dialog(child: AppDailog(isFromCreateAccount: true)),
                 );
               } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const CreatePasswordView()),
-                );
+                goTo(page: CreatePasswordView(), canPop: false);
               }
             },
           ),

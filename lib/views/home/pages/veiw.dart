@@ -1,34 +1,39 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
 
-import 'package:cosmetics/shared/search_future.dart';
+import 'package:cosmetics/core/ui/app_future.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomePageState extends State<HomePage> {
   final _searchController = TextEditingController();
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Gap(70),
+            49.ph,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
               child: Row(
                 children: [
-                  SearchFuture(
+                  AppInputFuture(
                     hintText: 'Search',
                     controller: _searchController,
 
@@ -39,21 +44,21 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            Gap(9),
 
+            12.ph,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
               child: Container(
                 width: 360.w,
                 height: 317.h,
-                child: Image.asset(
-                  'assets/images/top_head_line_home.png',
+                child: AppImage(
+                  path: 'assets/images/top_head_line_home.png',
                   width: 364.w,
                   height: 317.h,
                 ),
               ),
             ),
-            Gap(10),
+            10.ph,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),
               child: Align(
@@ -61,7 +66,6 @@ class _HomeViewState extends State<HomeView> {
                 child: Text(
                   'Top rated products',
                   style: TextStyle(
-                    fontFamily: 'Montserrat',
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primaryColor,
@@ -87,6 +91,7 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),
+            100.ph,
           ],
         ),
       ),
@@ -101,7 +106,7 @@ Widget _item() {
     padding: EdgeInsets.all(12),
     decoration: BoxDecoration(
       color: AppColors.secondaryColor,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(8.r),
       boxShadow: [
         BoxShadow(color: Colors.black12, blurRadius: 20, offset: Offset(3, 10)),
       ],
@@ -112,9 +117,9 @@ Widget _item() {
         Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/product_image.png',
+              borderRadius: BorderRadius.circular(8.r),
+              child: AppImage(
+                path: 'assets/images/product_image.png',
                 height: 161,
                 width: 169.w,
                 fit: BoxFit.cover,
@@ -123,7 +128,7 @@ Widget _item() {
           ],
         ),
 
-        Gap(11),
+        11.ph,
 
         Text(
           "Face tint / lip tint",
@@ -131,18 +136,16 @@ Widget _item() {
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: AppColors.primaryColor,
-            fontFamily: 'Montserrat',
           ),
         ),
 
-        Gap(11),
+        11.ph,
         Text(
           "\$44.99",
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
             color: Colors.blueGrey,
-            fontFamily: 'Montserrat',
           ),
         ),
       ],

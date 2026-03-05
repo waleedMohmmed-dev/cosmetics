@@ -1,15 +1,19 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/shared/costum_button.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
+import 'package:cosmetics/views/home/pages/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
-class CheckoutView extends StatelessWidget {
-  const CheckoutView({super.key});
+class CheckoutPage extends StatelessWidget {
+  const CheckoutPage({super.key});
 
-  /// Open Maps methodd
+  /// Url_Lunchur Open Maps methodd
   Future<void> _openMaps() async {
     final address = 'Mansoura,14 Porsaid St';
     final query = Uri.encodeComponent(address);
@@ -26,13 +30,13 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Column(
         children: [
-          Gap(80),
+          80.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
                   height: 33.h,
@@ -48,11 +52,12 @@ class CheckoutView extends StatelessWidget {
                       size: 20.sp,
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                      goTo(page: ProfilePage());
                     },
                   ),
                 ),
-                Gap(115),
+
+                100.pw,
                 Text(
                   'Checkout',
                   style: TextStyle(
@@ -64,7 +69,8 @@ class CheckoutView extends StatelessWidget {
               ],
             ),
           ),
-          // Gap(19),
+          10.ph,
+
           Stack(
             children: [
               Container(
@@ -87,7 +93,6 @@ class CheckoutView extends StatelessWidget {
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: AppColors.primaryColor,
-                    fontFamily: 'Montserrat',
                   ),
                 ),
               ),
@@ -98,24 +103,23 @@ class CheckoutView extends StatelessWidget {
                   width: 309.w,
                   height: 84.h,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                     border: Border.all(color: Color(0xff73B9BB), width: 1.5),
                   ),
                   child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-
                         child: GestureDetector(
                           onTap: _openMaps,
-                          child: Image.asset(
-                            'assets/images/map.png',
+                          child: AppImage(
+                            path: 'assets/images/map.png',
                             width: 96.w,
                             height: 60.h,
                           ),
                         ),
                       ),
-                      Gap(1),
+
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,22 +129,23 @@ class CheckoutView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Montserrat',
+
                               color: AppColors.primaryColor,
                             ),
                           ),
                           Text(
-                            ' Mansoura,14 Porsaid St',
+                            'Mansoura,14 Porsaid St',
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Montserrat',
+
                               color: AppColors.labelColor,
                             ),
                           ),
                         ],
                       ),
-                      Gap(15),
+                      10.pw,
+
                       Icon(CupertinoIcons.chevron_down, color: Colors.red),
                     ],
                   ),
@@ -155,7 +160,6 @@ class CheckoutView extends StatelessWidget {
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: AppColors.primaryColor,
-                    fontFamily: 'Montserrat',
                   ),
                 ),
               ),
@@ -168,20 +172,20 @@ class CheckoutView extends StatelessWidget {
                   width: 309.w,
                   height: 57.h,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                     border: Border.all(color: Color(0xff73B9BB), width: 1.5),
                   ),
                   child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          'assets/images/card_icon.png',
+                        child: AppImage(
+                          path: 'assets/images/card_icon.png',
                           width: 30.w,
                           height: 20.h,
                         ),
                       ),
-                      Gap(1),
+                      1.pw,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -191,13 +195,13 @@ class CheckoutView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Montserrat',
+
                               color: AppColors.primaryColor,
                             ),
                           ),
                         ],
                       ),
-                      Gap(116),
+                      100.pw,
                       Icon(CupertinoIcons.chevron_down, color: Colors.red),
                     ],
                   ),
@@ -212,20 +216,20 @@ class CheckoutView extends StatelessWidget {
                   width: 309.w,
                   height: 57.h,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                     border: Border.all(color: Color(0xff73B9BB), width: 1.5),
                   ),
                   child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          'assets/images/vaucher.png',
+                        child: AppImage(
+                          path: 'assets/images/vaucher.png',
                           width: 30.w,
                           height: 20.h,
                         ),
                       ),
-                      Gap(1),
+                      1.pw,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -235,17 +239,17 @@ class CheckoutView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
-                              fontFamily: 'Montserrat',
+
                               color: AppColors.primaryColor,
                             ),
                           ),
                         ],
                       ),
-                      Gap(80),
-                      CostumButton(
-                        width: 93.w,
+                      68.pw,
+                      AppButton(
+                        width: 101.w,
                         height: 30.h,
-                        buttonColor: AppColors.buttonColor,
+
                         buttonText: 'Apply',
                         bordersRadius: 20.r,
                         onTap: () {},
@@ -260,18 +264,18 @@ class CheckoutView extends StatelessWidget {
                 right: 14,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Image.asset('assets/images/line.png', height: 1.h),
+                  child: AppImage(path: 'assets/images/line.png', height: 1.h),
                 ),
               ),
               Positioned(
                 top: 430,
                 left: 35,
                 child: Text(
-                  '- REVIEW PAYMENT',
+                  '-REVIEW PAYMENT',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-                    fontFamily: 'Montserrat',
+
                     color: AppColors.primaryColor,
                   ),
                 ),
@@ -284,7 +288,7 @@ class CheckoutView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w400,
-                    fontFamily: 'Montserrat',
+
                     color: AppColors.primaryColor,
                   ),
                 ),
@@ -298,17 +302,15 @@ class CheckoutView extends StatelessWidget {
                     Text(
                       'Subtotal',
                       style: TextStyle(
-                        fontFamily: 'Montserrat',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         color: AppColors.primaryColor,
                       ),
                     ),
-                    Gap(220),
+                    200.pw,
                     Text(
                       '16.100 EGP',
                       style: TextStyle(
-                        fontFamily: 'Montserrat',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         color: AppColors.primaryColor,
@@ -326,17 +328,15 @@ class CheckoutView extends StatelessWidget {
                     Text(
                       'SHIPPING FEES',
                       style: TextStyle(
-                        fontFamily: 'Montserrat',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         color: AppColors.primaryColor,
                       ),
                     ),
-                    Gap(120),
+                    120.pw,
                     Text(
                       'TO BE CALCULATED',
                       style: TextStyle(
-                        fontFamily: 'Montserrat',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         color: AppColors.primaryColor,
@@ -361,17 +361,15 @@ class CheckoutView extends StatelessWidget {
                     Text(
                       'TOTAL + VAT',
                       style: TextStyle(
-                        fontFamily: 'Montserrat',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         color: AppColors.primaryColor,
                       ),
                     ),
-                    // Gap(180),
+                    180.pw,
                     Text(
                       '16.100 EGP',
                       style: TextStyle(
-                        fontFamily: 'Montserrat',
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                         color: AppColors.primaryColor,
@@ -384,15 +382,12 @@ class CheckoutView extends StatelessWidget {
                 top: 660,
                 left: 61,
                 right: 61,
-                child: CostumButton(
-                  buttonColor: AppColors.buttonColor,
+                child: AppButton(
                   buttonText: 'ORDER',
-                  width: 268.w,
-                  height: 65.h,
-                  bordersRadius: 60.r,
+
                   onTap: () {},
-                  icon: Image.asset(
-                    'assets/images/cart_suffixicon.png',
+                  icon: AppImage(
+                    path: 'assets/images/cart_suffixicon.png',
                     width: 20.w,
                     height: 20.h,
                   ),

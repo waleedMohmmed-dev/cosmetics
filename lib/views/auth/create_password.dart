@@ -1,88 +1,101 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/shared/costum_button.dart';
-import 'package:cosmetics/shared/costum_textfeild.dart';
-import 'package:cosmetics/shared/costum_dailog.dart';
-import 'package:cosmetics/views/auth/login.dart';
-import 'package:cosmetics/root.dart';
-import 'package:cosmetics/views/auth/verify.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
+import 'package:cosmetics/core/ui/app_input.dart';
+import 'package:cosmetics/core/ui/app_dailog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
-class CreatePasswordView extends StatelessWidget {
+class CreatePasswordView extends StatefulWidget {
   final bool isRegister;
 
   const CreatePasswordView({super.key, this.isRegister = false});
 
   @override
+  State<CreatePasswordView> createState() => _CreatePasswordViewState();
+}
+
+class _CreatePasswordViewState extends State<CreatePasswordView> {
+  final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  @override
+  void dispose() {
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          children: [
-            Gap(120),
-            Center(
-              child: Image.asset(
-                'assets/images/splash_image.png',
-                height: 57.sp,
-                width: 67.sp,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              120.ph,
+              Center(
+                child: AppImage(
+                  path: 'assets/images/splash_image.png',
+                  height: 57.sp,
+                  width: 67.sp,
+                ),
               ),
-            ),
-            Gap(40),
-            Text(
-              'Create Password',
-              style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
-                fontFamily: 'Montserrat',
+              40.ph,
+              Text(
+                'Create Password',
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryColor,
+                  fontFamily: 'Montserrat',
+                ),
               ),
-            ),
-            Gap(30),
-            Text(
-              'The password should have at least \n6 characters.',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: AppColors.primaryColor,
+              30.ph,
+              Text(
+                'The password should have at least \n6 characters.',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.primaryColor,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            Gap(60),
-            CostumTextField(
-              height: 46.w,
-              hintText: 'New password',
-              suffixIcon: Icon(
-                Icons.remove_red_eye,
-                color: AppColors.labelColor,
+              60.ph,
+              AppInput(
+                controller: newPasswordController,
+                height: 46.w,
+                hintText: 'New password',
+                suffixIcon: Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: AppColors.labelColor,
+                ),
               ),
-            ),
-            Gap(20),
-            CostumTextField(
-              height: 46.w,
-              hintText: 'Confirm password',
-              suffixIcon: Icon(
-                Icons.remove_red_eye,
-                color: AppColors.labelColor,
+              20.ph,
+              AppInput(
+                controller: confirmPasswordController,
+                height: 46.w,
+                hintText: 'Confirm password',
+                suffixIcon: Icon(
+                  Icons.visibility_off_outlined,
+                  color: AppColors.labelColor,
+                ),
               ),
-            ),
-            Gap(70),
-            CostumButton(
-              buttonText: 'Confirm',
-              buttonColor: AppColors.buttonColor,
-              width: 260.w,
-              height: 65.h,
-              bordersRadius: 50.r,
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) => const Dialog(child: CostumDailog()),
-                );
-              },
-            ),
-          ],
+              70.ph,
+              AppButton(
+                buttonText: 'Confirm',
+
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => const Dialog(child: AppDailog()),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

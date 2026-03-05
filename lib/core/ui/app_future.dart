@@ -1,9 +1,9 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchFuture extends StatefulWidget {
+class AppInputFuture extends StatefulWidget {
   final String? hintText;
 
   final Widget? suffixIcon;
@@ -18,7 +18,7 @@ class SearchFuture extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
 
-  SearchFuture({
+  AppInputFuture({
     super.key,
     this.hintText,
 
@@ -35,10 +35,10 @@ class SearchFuture extends StatefulWidget {
   });
 
   @override
-  State<SearchFuture> createState() => _SearchFutureState();
+  State<AppInputFuture> createState() => _AppInputFutureState();
 }
 
-class _SearchFutureState extends State<SearchFuture> {
+class _AppInputFutureState extends State<AppInputFuture> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(

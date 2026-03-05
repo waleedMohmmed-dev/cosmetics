@@ -1,27 +1,29 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/views/cart/cart.dart';
-import 'package:cosmetics/views/category/category.dart';
-import 'package:cosmetics/views/home/home.dart';
-import 'package:cosmetics/views/profile/profile.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
+import 'package:cosmetics/views/home/pages/cart.dart';
+import 'package:cosmetics/views/home/pages/categoies.dart';
+
+import 'package:cosmetics/views/home/pages/profile.dart';
+import 'package:cosmetics/views/home/pages/veiw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
-class Root extends StatefulWidget {
-  const Root({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<Root> createState() => _RootState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _RootState extends State<Root> {
+class _HomeViewState extends State<HomeView> {
   int selectedIndex = 0;
 
-  final List<Widget> pages = [
-    const HomeView(),
-    const CategoryView(),
-    CartView(),
-    const ProfileView(),
+  /// mecanzme type infreence
+  final pages = [
+    const HomePage(),
+    const CategoriesPage(),
+    CartPage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -52,10 +54,10 @@ class _RootState extends State<Root> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildNavItem('assets/svgs/home_icon.svg', 0),
-                  _buildNavItem('assets/svgs/categories.svg', 1),
-                  _buildNavItem('assets/svgs/my_cart.svg', 2),
-                  _buildNavItem('assets/svgs/profile.svg', 3),
+                  _buildNavItem('assets/icons/home.svg', 0),
+                  _buildNavItem('assets/icons/categories.svg', 1),
+                  _buildNavItem('assets/icons/my_cart.svg', 2),
+                  _buildNavItem('assets/icons/profile.svg', 3),
                 ],
               ),
             ),
@@ -74,8 +76,8 @@ class _RootState extends State<Root> {
           selectedIndex = index;
         });
       },
-      child: SvgPicture.asset(
-        iconPath,
+      child: AppImage(
+        path: iconPath,
         color: isSelected ? AppColors.buttonColor : Colors.grey,
         width: 20.w,
         height: 20.h,
@@ -83,3 +85,4 @@ class _RootState extends State<Root> {
     );
   }
 }
+/// resso coder high flutter 

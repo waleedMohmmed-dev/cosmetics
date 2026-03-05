@@ -58,7 +58,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/svgs/
+    - assets/fonts/
+    - assets/icons/
     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -73,12 +74,12 @@ flutter:
   fonts:
     - family: SegoeUI
       fonts:
-        - asset: assets/fonts/segoe_ui.ttf
-        - asset: assets/fonts/segoe_ui_bold.ttf
+        - asset: assets/fonts/segoe/segoe_uI.ttf
+        - asset: assets/fonts/segoe/segoe_uI_bold.ttf
 
     - family: Montserrat
       fonts:
-        - asset: assets/fonts/montserrat-Italic-variablefont_wght.ttf
-        - asset: assets/fonts/montserrat-variablefont_wght.ttf
+        - asset: assets/fonts/montserrat/montserrat-Italic-variablefont_wght.ttf
+        - asset: assets/fonts/montserrat/montserrat-variablefont_wght.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

@@ -1,12 +1,13 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/views/auth/login.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
+
 import 'package:cosmetics/views/auth/verify.dart';
 
-import 'package:cosmetics/shared/costum_button.dart';
-import 'package:cosmetics/shared/costum_textfeild.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
+import 'package:cosmetics/core/ui/app_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 class CreateAccountView extends StatefulWidget {
   const CreateAccountView({super.key});
@@ -17,127 +18,135 @@ class CreateAccountView extends StatefulWidget {
 
 class _RegisterViewState extends State<CreateAccountView> {
   final nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _subNumberController = TextEditingController();
-  final _numberController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+  final emailController = TextEditingController();
+  final subNumberController = TextEditingController();
+  final numberController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  void dipose() {
+    nameController.dispose();
+    emailController.dispose();
+    subNumberController.dispose();
+    numberController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          children: [
-            Gap(120),
-            Center(
-              child: Image.asset(
-                'assets/images/splash_image.png',
-                height: 62.sp,
-                width: 67.sp,
-              ),
-            ),
-            Gap(40),
-            Text(
-              'Create Account',
-              style: TextStyle(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryColor,
-                fontFamily: 'Montserrat',
-              ),
-            ),
-            Gap(70),
-            CostumTextField(labelText: 'Your Name', controller: nameController),
-            Gap(20),
-            CostumTextField(labelText: 'Email', controller: _emailController),
-            Gap(20),
-            Row(
-              children: [
-                CostumTextField(
-                  labelText: '+20',
-                  width: 72.w,
-                  height: 46.h,
-                  controller: _subNumberController,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              95.ph,
+              Center(
+                child: AppImage(
+                  path: 'assets/images/splash_image.png',
+                  height: 62.h,
+                  width: 67.w,
                 ),
-                Gap(10),
-                CostumTextField(
-                  labelText: 'Phone Number',
-                  width: 266.w,
-                  controller: _numberController,
+              ),
+              40.ph,
+              Text(
+                'Create Account',
+                style: TextStyle(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryColor,
                 ),
-              ],
-            ),
-            Gap(16),
-            CostumTextField(
-              controller: _passwordController,
-              hintText: 'Create your password',
-              suffixIcon: Icon(
-                Icons.remove_red_eye,
-                color: AppColors.labelColor,
               ),
-            ),
-            Gap(20),
-            CostumTextField(
-              controller: _confirmPasswordController,
-              hintText: 'Confirm Password',
-              suffixIcon: Icon(
-                Icons.visibility_off,
-                color: AppColors.labelColor,
+              71.ph,
+              AppInput(labelText: 'Your Name', controller: nameController),
+              37.ph,
+              AppInput(labelText: 'Email', controller: emailController),
+              33.ph,
+              Row(
+                children: [
+                  AppInput(
+                    labelText: '+20',
+                    width: 72.w,
+                    height: 46.h,
+                    controller: subNumberController,
+                  ),
+                  10.pw,
+                  AppInput(
+                    labelText: 'Phone Number',
+                    width: 266.w,
+                    controller: numberController,
+                  ),
+                ],
               ),
-            ),
-            Gap(16),
-            CostumButton(
-              buttonText: 'Next',
-              buttonColor: AppColors.buttonColor,
-              width: 268.w,
-              height: 65.h,
-              bordersRadius: 60.r,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (c) => VerifyView(isRegister: true),
-                  ),
-                );
-              },
-            ),
-            Spacer(),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const VerifyView(isRegister: true),
-                  ),
-                );
-              },
-              child: RichText(
-                text: TextSpan(
-                  text: "Have an account? ",
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 13.sp,
-                    fontFamily: 'Montserrat',
-                  ),
-                  children: [
-                    TextSpan(
-                      text: "Login",
-                      style: TextStyle(
-                        color: AppColors.buttonColor,
-                        fontSize: 13.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w500,
-                      ),
+              16.ph,
+              AppInput(
+                controller: passwordController,
+                hintText: 'Create your password',
+                suffixIcon: Icon(
+                  Icons.remove_red_eye_outlined,
+                  color: AppColors.labelColor,
+                ),
+              ),
+              20.ph,
+              AppInput(
+                controller: confirmPasswordController,
+                hintText: 'Confirm Password',
+                suffixIcon: Icon(
+                  Icons.visibility_off_outlined,
+                  color: AppColors.labelColor,
+                ),
+              ),
+              16.ph,
+              AppButton(
+                buttonText: 'Next',
+                buttonColor: AppColors.buttonColor,
+                width: 268.w,
+                height: 65.h,
+                bordersRadius: 60.r,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (c) => VerifyView(isRegister: true),
                     ),
-                  ],
+                  );
+                },
+              ),
+              40.ph,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const VerifyView(isRegister: true),
+                    ),
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: "Have an account? ",
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 13.sp,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Login",
+                        style: TextStyle(
+                          color: AppColors.buttonColor,
+                          fontSize: 13.sp,
+
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Gap(40),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,9 +1,9 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
-class CostumButton extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final String? buttonText;
   final Color? buttonColor;
   final double? width;
@@ -17,7 +17,7 @@ class CostumButton extends StatelessWidget {
   final Widget? tralingIcon;
   final bool isLoding;
 
-  const CostumButton({
+  const AppButton({
     super.key,
     this.buttonText,
     this.buttonColor,
@@ -38,14 +38,14 @@ class CostumButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor ?? AppColors.primaryColor,
+        backgroundColor: buttonColor ?? AppColors.buttonColor,
         shape: RoundedRectangleBorder(
           side:
               BorderSide(color: Color(0xffCCCCCC), width: 1) ??
               const BorderSide(color: Colors.white, width: 1),
-          borderRadius: BorderRadius.circular(bordersRadius ?? 8.r),
+          borderRadius: BorderRadius.circular(bordersRadius ?? 60.r),
         ),
-        fixedSize: Size(width ?? 331.w, height ?? 56.h),
+        fixedSize: Size(width ?? 268.w, height ?? 65.h),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +58,7 @@ class CostumButton extends StatelessWidget {
               fontSize: fontSize ?? 15.sp,
             ),
           ),
-          Gap(10.w),
+          10.pw,
           icon ?? const SizedBox.shrink(),
           tralingIcon ?? const SizedBox.shrink(),
         ],

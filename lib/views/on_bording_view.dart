@@ -1,10 +1,13 @@
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/shared/floating_action_widget.dart';
-import 'package:cosmetics/shared/costum_button.dart';
+
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/ui/app_floating_action_widget.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
 
 class OnBordingView extends StatefulWidget {
   const OnBordingView({super.key});
@@ -45,10 +48,7 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
         currentIndex++;
       });
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (c) => LoginView()),
-      );
+      goTo(page: LoginView(), canPop: false);
     }
   }
 
@@ -56,10 +56,9 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
   Widget build(BuildContext context) {
     final page = pages[currentIndex];
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.secondaryColor,
+
         elevation: 0,
         actions: [
           Padding(
@@ -81,13 +80,14 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset(
-              page['image'],
+            child: AppImage(
+              path: page['image'],
               width: currentIndex == 1 ? 314.w : 240.w,
               height: currentIndex == 1 ? 288.h : 230.h,
             ),
           ),
-          Gap(30),
+
+          30.ph,
           Text(
             page['title'],
             style: TextStyle(
@@ -97,7 +97,7 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
               fontFamily: 'SegoeUI',
             ),
           ),
-          Gap(10),
+          10.ph,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.w),
             child: Text(
@@ -111,17 +111,17 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
               textAlign: TextAlign.center,
             ),
           ),
-          Gap(40),
+
+          40.ph,
           currentIndex < pages.length - 1
-              ? FloatingActionWidget(
+              ? AppFloatingActionWidget(
                   backgroundColor: AppColors.primaryColor,
                   onPressed: nextPage,
                 )
-              : CostumButton(
+              : AppButton(
                   buttonText: page['buttonText'],
-                  bordersRadius: 58.r,
-                  width: 268.w,
-                  height: 65.h,
+                  buttonColor: AppColors.primaryColor,
+
                   onTap: nextPage,
                 ),
         ],

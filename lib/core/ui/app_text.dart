@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CostumText extends StatelessWidget {
+class AppText extends StatelessWidget {
   final String? text;
   final Color? color;
   final FontWeight? weight;
   final double? size;
   final int? maxLines;
 
-  const CostumText({
+  const AppText({
     super.key,
     this.text,
     this.color,

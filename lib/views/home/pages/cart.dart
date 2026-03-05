@@ -1,19 +1,19 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
 
-class CartView extends StatefulWidget {
-  CartView({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<CartView> createState() => _CartViewState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _CartViewState extends State<CartView> {
+class _CartPageState extends State<CartPage> {
   late List<int> quantitiys;
 
   @override
@@ -39,9 +39,7 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       appBar: AppBar(
-        backgroundColor: AppColors.secondaryColor,
         actions: [
           Row(
             children: [
@@ -50,15 +48,15 @@ class _CartViewState extends State<CartView> {
                 style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: 23.sp,
-                  fontFamily: 'Montserrat',
+
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Gap(100),
+              100.pw,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: SvgPicture.asset(
-                  'assets/icons/svgs/cart_icon.svg',
+                child: AppImage(
+                  path: 'assets/icons/svgs/cart_icon.svg',
                   width: 24.w,
                   height: 24.h,
                 ),
@@ -78,12 +76,12 @@ class _CartViewState extends State<CartView> {
                 style: TextStyle(
                   color: AppColors.primaryColor,
                   fontSize: 12.sp,
-                  fontFamily: 'Montserrat',
+
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            Gap(30),
+            30.ph,
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
@@ -96,7 +94,7 @@ class _CartViewState extends State<CartView> {
                 },
               ),
             ),
-            Gap(140),
+            100.ph,
           ],
         ),
       ),
@@ -116,8 +114,8 @@ Widget _item({
         padding: EdgeInsets.symmetric(vertical: 6),
         child: Row(
           children: [
-            Image.asset(
-              'assets/images/cart_product.png',
+            AppImage(
+              path: 'assets/images/cart_product.png',
               width: 102.w,
               height: 102.h,
             ),
@@ -129,33 +127,30 @@ Widget _item({
                   Text(
                     'Note Cosmetics',
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w700,
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  Gap(7),
+                  7.ph,
                   Text(
                     'Ultra rich mascara for lashes',
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  Gap(15),
+                  15.ph,
                   Text(
                     '350 EGP',
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w700,
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  Gap(10),
+                  10.ph,
                 ],
               ),
             ),
@@ -171,12 +166,12 @@ Widget _item({
         ),
         child: Row(
           children: [
-            Gap(13),
+            13.pw,
             InkWell(
               onTap: onMinus,
-              child: SvgPicture.asset('assets/svgs/minus.svg', width: 20.w),
+              child: SvgPicture.asset('assets/icons/minus.svg', width: 20.w),
             ),
-            Gap(32),
+            32.pw,
             Text(
               number.toString(),
               style: TextStyle(
@@ -189,12 +184,12 @@ Widget _item({
             InkWell(
               onTap: onAdd,
               child: SvgPicture.asset(
-                'assets/svgs/add.svg',
+                'assets/icons/add.svg',
                 width: 16.w,
                 height: 15.h,
               ),
             ),
-            Gap(15),
+            15.pw,
           ],
         ),
       ),

@@ -1,11 +1,14 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
-import 'package:cosmetics/views/auth/create_password.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
+import 'package:cosmetics/views/auth/login.dart';
+
 import 'package:cosmetics/views/auth/verify.dart';
-import 'package:cosmetics/shared/costum_button.dart';
-import 'package:cosmetics/shared/costum_textfeild.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
+import 'package:cosmetics/core/ui/app_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
@@ -15,15 +18,21 @@ class ForgetPasswordView extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPasswordView> {
-  final _phoneController = TextEditingController();
-  final _subNumberController = TextEditingController();
+  final phoneController = TextEditingController();
+  final subNumberController = TextEditingController();
+  @override
+  void dispose() {
+    phoneController.dispose();
+    subNumberController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Column(
         children: [
-          Gap(40),
+          40.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
@@ -43,23 +52,24 @@ class _ForgetPasswordState extends State<ForgetPasswordView> {
                       size: 20.sp,
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
+                      goTo(page: LoginView(), canPop: true);
                     },
                   ),
                 ),
               ],
             ),
           ),
-          Gap(40),
+          40.ph,
 
           Center(
-            child: Image.asset(
-              'assets/images/splash_image.png',
+            child: AppImage(
+              path: 'assets/images/splash_image.png',
               height: 62.sp,
               width: 67.sp,
             ),
           ),
-          Gap(40),
+          40.ph,
 
           Text(
             'Forget Password',
@@ -69,11 +79,11 @@ class _ForgetPasswordState extends State<ForgetPasswordView> {
               color: AppColors.primaryColor,
             ),
           ),
-          Gap(40),
+          40.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60.0),
             child: Text(
-              'Please enter your phone number below            \n  to recovery your password.',
+              'Please enter your phone number below          \n  to recovery your password.',
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
@@ -81,41 +91,36 @@ class _ForgetPasswordState extends State<ForgetPasswordView> {
               ),
             ),
           ),
-          Gap(45),
+          40.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             child: Row(
               children: [
-                CostumTextField(
-                  controller: _subNumberController,
+                AppInput(
+                  controller: subNumberController,
                   hintText: '+20',
                   width: 72.w,
                   height: 46.h,
                 ),
-                Gap(5),
-                CostumTextField(
+                5.pw,
+                AppInput(
                   labelText: 'Phone Number',
                   height: 46.h,
                   width: 266.w,
 
-                  controller: _phoneController,
+                  controller: phoneController,
                 ),
               ],
             ),
           ),
-          Gap(55),
-          CostumButton(
+          55.ph,
+          AppButton(
             buttonColor: AppColors.buttonColor,
 
             buttonText: 'Next',
-            bordersRadius: 60.r,
-            width: 250.w,
-            height: 65.h,
+
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (c) => VerifyView()),
-              );
+              goTo(page: VerifyView(), canPop: true);
             },
           ),
         ],

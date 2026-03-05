@@ -1,13 +1,15 @@
-import 'package:cosmetics/core/constans/app_colors.dart';
+import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/views/auth/forget_password.dart';
 import 'package:cosmetics/views/auth/create_account.dart';
+import 'package:cosmetics/views/home/view.dart';
+import 'package:cosmetics/core/ui/app_button.dart';
+import 'package:cosmetics/core/ui/app_input.dart';
 
-import 'package:cosmetics/root.dart';
-import 'package:cosmetics/shared/costum_button.dart';
-import 'package:cosmetics/shared/costum_textfeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -17,150 +19,158 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final _passwordController = TextEditingController();
-  final _subNamburController = TextEditingController();
+  final passwordController = TextEditingController();
+  final subNamburController = TextEditingController();
 
-  final _numberController = TextEditingController();
+  final numberController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    passwordController.dispose();
+    subNamburController.dispose();
+    numberController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          children: [
-            Gap(100),
-            Center(
-              child: Image.asset(
-                'assets/images/login_logo.png',
-                width: 284.w,
-                height: 227.h,
-              ),
-            ),
-            Gap(25),
-            Text(
-              'Login Now',
-              style: TextStyle(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat',
-                color: AppColors.primaryColor,
-              ),
-            ),
-            Gap(14),
-            Text(
-              'Please enter the details below to continue',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Montserrat',
-                color: AppColors.primaryColor,
-              ),
-            ),
-            Gap(25),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              100.ph,
 
-            Row(
-              children: [
-                CostumTextField(
-                  hintText: '+20',
-                  height: 46.h,
-                  width: 72.w,
-                  controller: _subNamburController,
-                  // suffixIcon: Icon(Icons.arrow_drop_down, size: 13.sp),
-                  keyboardType: TextInputType.number,
+              Center(
+                child: AppImage(
+                  path: 'assets/images/login_logo.png',
+                  width: 284.w,
+                  height: 227.h,
                 ),
-                Gap(5),
-                CostumTextField(
-                  labelText: 'Phone Number',
-                  height: 46.h,
-                  width: 260.w,
-                  controller: _numberController,
-                ),
-              ],
-            ),
-            Gap(7),
-            CostumTextField(
-              hintText: 'Your Passwoed',
-              width: double.infinity,
-              height: 46.h,
-              suffixIcon: Icon(
-                Icons.visibility_off,
-                color: AppColors.labelColor,
               ),
-              controller: _passwordController,
-              keyboardType: TextInputType.number,
-            ),
-            Gap(11),
+              25.ph,
+              Text(
+                'Login Now',
+                style: TextStyle(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.bold,
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (c) => ForgetPasswordView()),
-                  );
-                },
-                child: Text(
-                  'Forget Password?',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 12.sp,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              14.ph,
+              Text(
+                'Please enter the details below to continue',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              25.ph,
+
+              Row(
+                children: [
+                  AppInput(
+                    hintText: '+20',
+                    height: 46.h,
+                    width: 72.w,
+                    controller: subNamburController,
+                    // suffixIcon: Icon(Icons.arrow_drop_down, size: 13.sp),
+                    keyboardType: TextInputType.number,
                   ),
-                ),
-              ),
-            ),
-            Gap(43),
-
-            CostumButton(
-              buttonText: 'Login',
-              width: 260.w,
-              height: 65.h,
-              bordersRadius: 30.r,
-              buttonColor: AppColors.buttonColor,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (c) => Root()),
-                );
-              },
-            ),
-            Spacer(),
-
-            GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (c) => CreateAccountView()),
-                );
-              },
-              child: RichText(
-                text: TextSpan(
-                  text: "Don't have an account? ",
-                  style: TextStyle(
-                    color: AppColors.primaryColor,
-                    fontSize: 13.sp,
-                    fontFamily: 'Montserrat',
+                  5.pw,
+                  AppInput(
+                    labelText: 'Phone Number',
+                    height: 46.h,
+                    width: 285.w,
+                    controller: numberController,
                   ),
+                ],
+              ),
+              7.ph,
+              AppInput(
+                hintText: 'Your Passwoed',
+                width: double.infinity,
+                height: 46.h,
+                suffixIcon: Icon(
+                  Icons.visibility_off_outlined,
+                  color: AppColors.labelColor,
+                ),
+                controller: passwordController,
+                keyboardType: TextInputType.number,
+              ),
+              11.ph,
 
-                  children: [
-                    TextSpan(
-                      text: "Register",
-                      style: TextStyle(
-                        color: AppColors.buttonColor,
-                        fontSize: 13.sp,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                      ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () {
+                    goTo(page: ForgetPasswordView(), canPop: true);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (c) => ForgetPasswordView()),
+                    // );
+                  },
+                  child: Text(
+                    'Forget Password?',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12.sp,
+
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-            Gap(40),
-          ],
+              43.ph,
+
+              AppButton(
+                buttonText: 'Login',
+
+                onTap: () {
+                  goTo(page: HomeView(), canPop: false);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (c) => MainVeiw()),
+                  // );
+                },
+              ),
+              86.ph,
+
+              GestureDetector(
+                onTap: () {
+                  goTo(page: CreateAccountView(), canPop: true);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(builder: (c) => CreateAccountView()),
+                  // );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: "Don't have an account? ",
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 13.sp,
+                    ),
+
+                    children: [
+                      TextSpan(
+                        text: "Register",
+                        style: TextStyle(
+                          color: AppColors.buttonColor,
+                          fontSize: 13.sp,
+
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

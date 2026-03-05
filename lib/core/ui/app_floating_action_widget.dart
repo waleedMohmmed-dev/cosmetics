@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class FloatingActionWidget extends StatelessWidget {
+class AppFloatingActionWidget extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color backgroundColor;
   final Widget? widget;
 
-  const FloatingActionWidget({
+  const AppFloatingActionWidget({
     super.key,
     required this.onPressed,
     required this.backgroundColor,
