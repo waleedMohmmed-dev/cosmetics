@@ -5,7 +5,6 @@ import 'package:cosmetics/core/ui/app_future.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -34,7 +33,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
           ),
 
-          Gap(24),
+          24.ph,
           AppInputFuture(
             hintText: 'Search',
             controller: _searchForCategoryController,
@@ -71,7 +70,7 @@ Widget _item() {
               width: 64.w,
               height: 69.h,
             ),
-            Gap(12),
+            12.ph,
             Text(
               'Bundles',
               style: TextStyle(

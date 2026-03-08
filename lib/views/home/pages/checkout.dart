@@ -7,23 +7,47 @@ import 'package:cosmetics/views/home/pages/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geocoding/geocoding.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
-class CheckoutPage extends StatelessWidget {
+class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
 
-  /// Url_Lunchur Open Maps methodd
-  Future<void> _openMaps() async {
-    final address = 'Mansoura,14 Porsaid St';
-    final query = Uri.encodeComponent(address);
-    final url = 'https://www.google.com/maps/search/?api=1&query=$query';
+  @override
+  State<CheckoutPage> createState() => _CheckoutPageState();
+}
 
-    /// if the phone can open link
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Can not open The Mpas Soryy Bro .';
+class _CheckoutPageState extends State<CheckoutPage> {
+  String addressTitle = "Home";
+
+  String addressText = "Mansoura, 14 Porsaid St";
+
+  LatLng pickedLocation = LatLng(31.0409, 31.3785);
+
+  void openMapPicker() async {
+    LatLng? address = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GoogleMapsPage(initialPosition: pickedLocation),
+      ),
+    );
+
+    if (address != null) {
+      pickedLocation = address;
+
+      /// GeCoding
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        pickedLocation.latitude,
+        pickedLocation.longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks.first;
+        setState(() {
+          addressTitle = place.name ?? "Address";
+          addressText = "${place.street}, ${place.locality}, ${place.country}";
+        });
+      }
     }
   }
 
@@ -56,7 +80,6 @@ class CheckoutPage extends StatelessWidget {
                     },
                   ),
                 ),
-
                 100.pw,
                 Text(
                   'Checkout',
@@ -70,7 +93,6 @@ class CheckoutPage extends StatelessWidget {
             ),
           ),
           10.ph,
-
           Stack(
             children: [
               Container(
@@ -111,7 +133,7 @@ class CheckoutPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: GestureDetector(
-                          onTap: _openMaps,
+                          onTap: openMapPicker,
                           child: AppImage(
                             path: 'assets/images/map.png',
                             width: 96.w,
@@ -119,38 +141,41 @@ class CheckoutPage extends StatelessWidget {
                           ),
                         ),
                       ),
-
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Home',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-
-                              color: AppColors.primaryColor,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              maxLines: 1,
+                              addressTitle,
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primaryColor,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Mansoura,14 Porsaid St',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-
-                              color: AppColors.labelColor,
+                            Text(
+                              maxLines: 1,
+                              addressText,
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.labelColor,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       10.pw,
-
                       Icon(CupertinoIcons.chevron_down, color: Colors.red),
                     ],
                   ),
                 ),
               ),
+
               Positioned(
                 top: 180,
                 left: 27,
@@ -163,8 +188,6 @@ class CheckoutPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              ///
               Positioned(
                 top: 220,
                 left: 41,
@@ -195,7 +218,6 @@ class CheckoutPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w600,
-
                               color: AppColors.primaryColor,
                             ),
                           ),
@@ -207,8 +229,6 @@ class CheckoutPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              ///
               Positioned(
                 top: 300,
                 left: 41,
@@ -239,7 +259,6 @@ class CheckoutPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
-
                               color: AppColors.primaryColor,
                             ),
                           ),
@@ -249,7 +268,6 @@ class CheckoutPage extends StatelessWidget {
                       AppButton(
                         width: 101.w,
                         height: 30.h,
-
                         buttonText: 'Apply',
                         bordersRadius: 20.r,
                         onTap: () {},
@@ -275,7 +293,6 @@ class CheckoutPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-
                     color: AppColors.primaryColor,
                   ),
                 ),
@@ -288,7 +305,6 @@ class CheckoutPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w400,
-
                     color: AppColors.primaryColor,
                   ),
                 ),
@@ -351,8 +367,6 @@ class CheckoutPage extends StatelessWidget {
                 top: 570,
                 child: Divider(thickness: 1, color: Color(0xff73B9BB)),
               ),
-
-              /// divider
               Positioned(
                 top: 600,
                 left: 35,
@@ -384,7 +398,6 @@ class CheckoutPage extends StatelessWidget {
                 right: 61,
                 child: AppButton(
                   buttonText: 'ORDER',
-
                   onTap: () {},
                   icon: AppImage(
                     path: 'assets/images/cart_suffixicon.png',
@@ -394,6 +407,63 @@ class CheckoutPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// google maps screen foucs ya waleed
+class GoogleMapsPage extends StatefulWidget {
+  final LatLng initialPosition;
+  const GoogleMapsPage({super.key, required this.initialPosition});
+
+  @override
+  State<GoogleMapsPage> createState() => _GoogleMapsPageState();
+}
+
+class _GoogleMapsPageState extends State<GoogleMapsPage> {
+  late LatLng selectedPostion;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedPostion = widget.initialPosition;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: widget.initialPosition,
+              zoom: 15,
+            ),
+            onTap: (position) {
+              setState(() {
+                selectedPostion = position;
+              });
+            },
+            markers: {
+              Marker(markerId: MarkerId("m"), position: selectedPostion),
+            },
+          ),
+          Positioned(
+            bottom: 20,
+            left: 45,
+            right: 55,
+            child: AppButton(
+              bordersRadius: 10.r,
+              buttonText: 'Select Location ',
+              width: 1.w,
+              height: 1,
+              onTap: () {
+                Navigator.pop(context, selectedPostion);
+              },
+            ),
           ),
         ],
       ),
