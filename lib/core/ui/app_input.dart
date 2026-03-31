@@ -11,7 +11,6 @@ class AppInput extends StatefulWidget {
   final bool? isPassword;
   final double? height;
   final TextInputType? keyboardType;
-
   final TextEditingController? controller;
   void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
@@ -32,7 +31,6 @@ class AppInput extends StatefulWidget {
     this.onChanged,
     this.keyboardType,
   });
-
   @override
   State<AppInput> createState() => _AppInputState();
 }
@@ -43,16 +41,12 @@ class _AppInputState extends State<AppInput> {
     return SizedBox(
       height: widget.height ?? 56.h,
       width: widget.width ?? 355.w,
-
       child: TextFormField(
         onChanged: widget.onChanged,
         onFieldSubmitted: widget.onFieldSubmitted,
         keyboardType: widget.keyboardType,
-
         controller: widget.controller,
-
         validator: widget.validator,
-
         autofocus: false,
         obscureText: widget.isPassword ?? false,
         cursorColor: AppColors.primaryColor,
@@ -75,19 +69,19 @@ class _AppInputState extends State<AppInput> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: const BorderSide(color: Color(0xff8E8EA9), width: 1),
+            borderSide: const BorderSide(color: Color(0xff8E8EA9), width: 0.5),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide(color: Color(0xff8E8EA9), width: 1),
+            borderSide: BorderSide(color: Color(0xff8E8EA9), width: 0.5),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.r),
-            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.r),
-            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: const BorderSide(color: Colors.red, width: 0.5),
           ),
           filled: true,
           fillColor: AppColors.secondaryColor,

@@ -98,7 +98,7 @@ class _VerifyViewState extends State<VerifyView> {
           40.ph,
           RichText(
             text: TextSpan(
-              text: 'We just sent a 4-digit verification code to\n \n  ',
+              text: 'We just sent a 4-digit verification code to\n \n ',
               style: TextStyle(
                 color: AppColors.primaryColor,
                 fontSize: 14.sp,
@@ -114,7 +114,7 @@ class _VerifyViewState extends State<VerifyView> {
                   ),
                 ),
                 TextSpan(
-                  text: 'Enter the code in the box \n \n below to continue.  ',
+                  text: 'Enter the code in the box \n \n below to continue.',
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 14.sp,

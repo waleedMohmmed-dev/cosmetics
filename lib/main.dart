@@ -1,7 +1,7 @@
 import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/network/dio_client.dart';
 import 'package:cosmetics/views/splash.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'
     show ScreenUtil, ScreenUtilInit;
@@ -33,10 +33,9 @@ class _MyAppState extends State<MyApp> {
               backgroundColor: AppColors.secondaryColor,
               elevation: 0,
             ),
-            // theme text here
           ),
           navigatorKey: navKey,
-          home: SplashView(),
+          home: const SplashView(),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
         );

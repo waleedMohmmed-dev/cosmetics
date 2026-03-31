@@ -68,18 +68,8 @@ class AppDailog extends StatelessWidget {
               onTap: () {
                 if (isFromCreateAccount) {
                   goTo(page: HomeView(), canPop: false);
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(builder: (_) => MainVeiw()),
-                  //   (route) => false,
-                  // );
                 } else {
                   goTo(page: LoginView());
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(builder: (_) => LoginView()),
-                  //   (route) => false,
-                  // );
                 }
               },
             ),
