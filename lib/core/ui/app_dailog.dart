@@ -2,8 +2,9 @@ import 'package:cosmetics/core/exeptions/spacing.dart';
 import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:cosmetics/core/logic/helper_method.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
-import 'package:cosmetics/views/home/view.dart';
 import 'package:cosmetics/views/auth/login.dart';
+import 'package:cosmetics/views/home/main_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,7 +30,7 @@ class AppDailog extends StatelessWidget {
           // mainAxisSize: MainAxisSize.max,
           children: [
             AppImage(
-              path: 'assets/images/dialog_logo.png',
+              image: 'assets/images/dialog_logo.png',
               width: 100.w,
               height: 100.h,
             ),
@@ -61,13 +62,11 @@ class AppDailog extends StatelessWidget {
             ),
             23.ph,
             AppButton(
-              buttonText: isFromCreateAccount
-                  ? 'Go To Home'
-                  : 'Return To Login',
+              text: isFromCreateAccount ? 'Go To Home' : 'Return To Login',
 
               onTap: () {
                 if (isFromCreateAccount) {
-                  goTo(page: HomeView(), canPop: false);
+                  goTo(page: MianView(), canPop: false);
                 } else {
                   goTo(page: LoginView());
                 }

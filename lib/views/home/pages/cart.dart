@@ -56,9 +56,10 @@ class _CartPageState extends State<CartPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: AppImage(
-                  path: 'assets/icons/svgs/cart_icon.svg',
+                  image: 'assets/icons/my_cart.svg',
                   width: 24.w,
                   height: 24.h,
+                  color: AppColors.buttonColor,
                 ),
               ),
             ],
@@ -115,7 +116,7 @@ Widget _item({
         child: Row(
           children: [
             AppImage(
-              path: 'assets/images/cart_product.png',
+              image: 'assets/images/cart_product.png',
               width: 102.w,
               height: 102.h,
             ),
@@ -166,12 +167,14 @@ Widget _item({
         ),
         child: Row(
           children: [
-            13.pw,
-            InkWell(
-              onTap: onMinus,
-              child: SvgPicture.asset('assets/icons/minus.svg', width: 20.w),
+            10.pw,
+
+            IconButton(
+              onPressed: onMinus,
+              icon: SvgPicture.asset('assets/icons/minus.svg', width: 20.w),
             ),
-            32.pw,
+
+            14.pw,
             Text(
               number.toString(),
               style: TextStyle(

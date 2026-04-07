@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 
 class AuthRepo {
   final ApiService apiService = ApiService();
+  late CountriesData? countriesData;
 
   /// Login
   Future<UserModel?> login(
@@ -23,7 +24,7 @@ class AuthRepo {
 
       if (response is Map<String, dynamic>) {
         final message = response['message'];
-        final code = response['statuscode'];
+        final code = response['statusCode'];
         if (code != null) {
           throw ApiError(message: '$message');
         }
@@ -61,7 +62,7 @@ class AuthRepo {
 
       if (response is Map<String, dynamic>) {
         final message = response['message'];
-        final code = response['status code'];
+        final code = response['statusCode'];
         if (code != 200 && code != 201) {
           throw ApiError(message: '$message');
         }
@@ -80,4 +81,32 @@ class AuthRepo {
   }
 
   /// forget password
+  Future<UserModel?> forgetPassword(
+    String countryCode,
+    String phoneNumber,
+  ) async {
+    try {
+      final response = await apiService.post('/api/Auth/reset-password', {
+        'countryCode': countryCode,
+        "phoneNumber": phoneNumber,
+      });
+      if (response is Map<String, dynamic>) {
+        final message = response['message'];
+        final code = response['statusCode'];
+        if (code != null) {
+          throw ApiError(message: '$message');
+        }
+      }
+      final user = UserModel.fromJson(response);
+
+      if (user.token != null) {
+        await PrefHelper.saveToken(user.token!);
+      }
+      return user;
+    } on DioException catch (e) {
+      throw ApiExceptions.handleError(e);
+    } catch (e) {
+      throw ApiError(message: e.toString());
+    }
+  }
 }

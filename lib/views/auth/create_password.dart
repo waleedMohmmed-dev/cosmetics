@@ -1,9 +1,10 @@
 import 'package:cosmetics/core/exeptions/spacing.dart';
 import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:cosmetics/core/logic/input_validator.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/core/ui/app_input.dart';
-import 'package:cosmetics/core/ui/app_dailog.dart';
+import 'package:cosmetics/network/api_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,11 +21,28 @@ class CreatePasswordView extends StatefulWidget {
 class _CreatePasswordViewState extends State<CreatePasswordView> {
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final ApiService apiService = ApiService();
+
+  Future<void> getData() async {
+    final res = await apiService.post('/api/Auth/reset-password', {
+      "countryCode": '+20',
+      "phoneNumber": "1234567890",
+      "newPassword": "01030405060",
+      "confirmPassword": "01030405060",
+    });
+  }
+
   @override
   void dispose() {
     newPasswordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override
@@ -38,7 +56,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
               120.ph,
               Center(
                 child: AppImage(
-                  path: 'assets/images/splash_image.png',
+                  image: 'assets/images/splash_image.png',
                   height: 57.sp,
                   width: 67.sp,
                 ),
@@ -72,6 +90,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                   Icons.remove_red_eye_outlined,
                   color: AppColors.labelColor,
                 ),
+                validator: InputValidator.passwordValidator,
               ),
               20.ph,
               AppInput(
@@ -82,15 +101,21 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                   Icons.visibility_off_outlined,
                   color: AppColors.labelColor,
                 ),
+                validator: InputValidator.passwordValidator,
               ),
+
               70.ph,
               AppButton(
-                buttonText: 'Confirm',
+                text: 'Confirm',
 
                 onTap: () {
+                  getData();
                   showDialog(
                     context: context,
-                    builder: (_) => const Dialog(child: AppDailog()),
+                    builder: (_) => const Dialog(
+                      child: Center(),
+                      //  AppDailog()
+                    ),
                   );
                 },
               ),

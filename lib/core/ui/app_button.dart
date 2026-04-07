@@ -1,11 +1,12 @@
 import 'package:cosmetics/core/exeptions/spacing.dart';
 import 'package:cosmetics/core/logic/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppButton extends StatelessWidget {
-  final String? buttonText;
-  final Color? buttonColor;
+  final String? text;
+  final Color? color;
   final double? width;
   final double? height;
   final double? bordersRadius;
@@ -19,8 +20,8 @@ class AppButton extends StatelessWidget {
 
   const AppButton({
     super.key,
-    this.buttonText,
-    this.buttonColor,
+    this.text,
+    this.color,
     this.side,
     this.width,
     this.height,
@@ -35,10 +36,15 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // if (isLoding) {
+    //   return Center(
+    //     child: CupertinoActivityIndicator(color: AppColors.buttonColor),
+    //   );
+    // }
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor ?? AppColors.buttonColor,
+        backgroundColor: color ?? AppColors.buttonColor,
         shape: RoundedRectangleBorder(
           side:
               BorderSide(color: Color(0xffCCCCCC), width: 1) ??
@@ -51,7 +57,7 @@ class AppButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            buttonText ?? "",
+            text ?? "",
             style: TextStyle(
               color: textColor ?? Colors.white,
               fontWeight: FontWeight.w600,

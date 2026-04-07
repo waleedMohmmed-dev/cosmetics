@@ -1,9 +1,8 @@
 import 'package:cosmetics/core/exeptions/spacing.dart';
 import 'package:cosmetics/core/logic/app_colors.dart';
-import 'package:cosmetics/core/logic/helper_method.dart';
+import 'package:cosmetics/core/ui/app_back.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
-import 'package:cosmetics/views/home/pages/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +18,7 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   String addressTitle = "Home";
-
   String addressText = "Mansoura, 14 Porsaid St";
-
   LatLng pickedLocation = LatLng(31.0409, 31.3785);
 
   void openMapPicker() async {
@@ -62,23 +59,15 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  height: 33.h,
-                  width: 33.w,
-                  decoration: BoxDecoration(
-                    color: Color(0xff1010100D).withOpacity(0.1),
-                    shape: BoxShape.circle,
+                AppBack(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                    size: 20.sp,
                   ),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                      size: 20.sp,
-                    ),
-                    onPressed: () {
-                      goTo(page: ProfilePage());
-                    },
-                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 100.pw,
                 Text(
@@ -135,7 +124,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         child: GestureDetector(
                           onTap: openMapPicker,
                           child: AppImage(
-                            path: 'assets/images/map.png',
+                            image: 'assets/images/map.png',
                             width: 96.w,
                             height: 60.h,
                           ),
@@ -203,7 +192,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AppImage(
-                          path: 'assets/images/card_icon.png',
+                          image: 'assets/images/card_icon.png',
                           width: 30.w,
                           height: 20.h,
                         ),
@@ -244,7 +233,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AppImage(
-                          path: 'assets/images/vaucher.png',
+                          image: 'assets/images/vaucher.png',
                           width: 30.w,
                           height: 20.h,
                         ),
@@ -268,7 +257,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       AppButton(
                         width: 101.w,
                         height: 30.h,
-                        buttonText: 'Apply',
+                        text: 'Apply',
                         bordersRadius: 20.r,
                         onTap: () {},
                       ),
@@ -282,7 +271,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 right: 14,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: AppImage(path: 'assets/images/line.png', height: 1.h),
+                  child: AppImage(image: 'assets/images/line.png', height: 1.h),
                 ),
               ),
               Positioned(
@@ -397,10 +386,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 left: 61,
                 right: 61,
                 child: AppButton(
-                  buttonText: 'ORDER',
+                  text: 'ORDER',
                   onTap: () {},
                   icon: AppImage(
-                    path: 'assets/images/cart_suffixicon.png',
+                    image: 'assets/images/cart_suffixicon.png',
                     width: 20.w,
                     height: 20.h,
                   ),
@@ -414,7 +403,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 }
 
-/// google maps screen foucs ya waleed
+/// google maps screen foucs here
 class GoogleMapsPage extends StatefulWidget {
   final LatLng initialPosition;
   const GoogleMapsPage({super.key, required this.initialPosition});
@@ -457,7 +446,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
             right: 55,
             child: AppButton(
               bordersRadius: 10.r,
-              buttonText: 'Select Location ',
+              text: 'Select Location ',
               width: 1.w,
               height: 1,
               onTap: () {

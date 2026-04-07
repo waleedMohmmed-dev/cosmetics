@@ -15,30 +15,29 @@ class DioClient {
 
   DioClient() {
     _dio.interceptors.add(
-      LogInterceptor(
+      PrettyDioLogger(
+        requestHeader: true,
         requestBody: true,
         responseBody: true,
-        request: true,
-        requestHeader: true,
-        responseHeader: true,
         error: true,
       ),
     );
-
-    /// pretty dio logger
-    dio.interceptors.add(PrettyDioLogger());
 
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           final token = await PrefHelper.getToken();
+
           if (token != null && token.isNotEmpty) {
+            print('Logout User Token: $token');
             options.headers['Authorization'] = 'Bearer $token';
           }
+
           return handler.next(options);
         },
       ),
     );
   }
+
   Dio get dio => _dio;
 }

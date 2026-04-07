@@ -5,14 +5,18 @@ import 'package:cosmetics/core/logic/helper_method.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_dailog.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
+import 'package:cosmetics/core/ui/app_verify_code.dart';
+import 'package:cosmetics/network/api_service.dart';
 import 'package:cosmetics/views/auth/create_password.dart';
+import 'package:cosmetics/views/home/veiw.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerifyView extends StatefulWidget {
+  final String? phoneNumber;
   final bool isRegister;
-  const VerifyView({super.key, this.isRegister = false});
+  const VerifyView({super.key, this.isRegister = false, this.phoneNumber});
 
   @override
   State<VerifyView> createState() => _VerifyViewState();
@@ -21,12 +25,15 @@ class VerifyView extends StatefulWidget {
 class _VerifyViewState extends State<VerifyView> {
   final formKey = GlobalKey<FormState>();
   late TextEditingController pinCodeController;
+  late final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final ApiService apiService = ApiService();
+  String? otp;
 
   Timer? _timer;
-
   int _totalSeconds = 40;
   int _remaining = 40;
-
   bool _canResend = false;
 
   @override
@@ -34,6 +41,7 @@ class _VerifyViewState extends State<VerifyView> {
     super.initState();
     pinCodeController = TextEditingController();
     _startTimer();
+    getVirifyData();
   }
 
   void _startTimer() {
@@ -73,6 +81,18 @@ class _VerifyViewState extends State<VerifyView> {
     super.dispose();
   }
 
+  Future<void> getVirifyData() async {
+    final phone = phoneController.text.trim();
+    final password = passwordController.text.trim();
+    try {
+      final res = await apiService.post('/api/Auth/verify-otp', {
+        "countryCode": "+20",
+        "phoneNumber": '01020304040',
+        "otpCode": "1111",
+      });
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +101,7 @@ class _VerifyViewState extends State<VerifyView> {
           100.ph,
           Center(
             child: AppImage(
-              path: 'assets/images/splash_image.png',
+              image: 'assets/images/splash_image.png',
               height: 67.h,
               width: 62.w,
             ),
@@ -96,25 +116,23 @@ class _VerifyViewState extends State<VerifyView> {
             ),
           ),
           40.ph,
-          RichText(
-            text: TextSpan(
-              text: 'We just sent a 4-digit verification code to\n \n ',
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-              ),
+
+          Text.rich(
+            TextSpan(
               children: [
+                TextSpan(text: 'We just sent a 4-digit verification code to  '),
                 TextSpan(
-                  text: "+20 1022658997",
+                  text: widget.phoneNumber,
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
+                    height: 2,
                   ),
                 ),
+
                 TextSpan(
-                  text: 'Enter the code in the box \n \n below to continue.',
+                  text: 'Enter the code in the box below to continue.',
                   style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 14.sp,
@@ -123,54 +141,32 @@ class _VerifyViewState extends State<VerifyView> {
                 ),
               ],
             ),
+            textAlign: TextAlign.center,
           ),
+
           40.ph,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 13),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                'Edit the number',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.buttonColor,
-                  fontWeight: FontWeight.w600,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Edit the number',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: AppColors.buttonColor,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
           ),
           20.ph,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 44),
-            child: PinCodeTextField(
-              appContext: context,
-              length: 4,
-              controller: pinCodeController,
-              obscureText: false,
-              enableActiveFill: true,
-              keyboardType: TextInputType.number,
-              textStyle: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w600,
-              ),
-              pinTheme: PinTheme(
-                selectedBorderWidth: 1,
-                fieldWidth: 66.w,
-                fieldHeight: 60.h,
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(8.r),
-                selectedColor: Color(0xffD75D72),
-                selectedFillColor: AppColors.secondaryColor,
-                activeColor: Color(0xffD75D72),
-                activeFillColor: AppColors.secondaryColor,
-                inactiveColor: Color(0xff8989925C),
-                inactiveFillColor: AppColors.secondaryColor,
-              ),
-              onChanged: (value) {},
-              onCompleted: (value) {},
-            ),
-          ),
+          AppVerifyCode(),
+
           43.ph,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -189,6 +185,11 @@ class _VerifyViewState extends State<VerifyView> {
                       ),
                       children: [
                         TextSpan(
+                          /// recognizer
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              goTo(page: HomePage());
+                            },
                           text: "Resend",
                           style: TextStyle(
                             color: _canResend ? Colors.red : Colors.grey,
@@ -212,7 +213,7 @@ class _VerifyViewState extends State<VerifyView> {
           ),
           113.ph,
           AppButton(
-            buttonText: 'Done',
+            text: 'Done',
             onTap: () {
               if (widget.isRegister) {
                 showDialog(

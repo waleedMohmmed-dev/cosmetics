@@ -60,3 +60,25 @@ class User {
     return data;
   }
 }
+
+class CountriesData {
+  /// Handel List Response
+  late final List<CountryModel> list;
+
+  CountriesData.fromJson(Map<String, dynamic> json) {
+    list = List.from(
+      json['list'] ?? [],
+    ).map((e) => CountryModel.fromJson(e)).toList();
+  }
+}
+
+class CountryModel {
+  late final int id;
+  late final String code;
+  late final String name;
+  CountryModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? 0;
+    code = json['code'] ?? 0;
+    name = json['name'] ?? 0;
+  }
+}

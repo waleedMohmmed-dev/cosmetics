@@ -1,10 +1,10 @@
 import 'package:cosmetics/core/exeptions/spacing.dart';
+import 'package:cosmetics/core/logic/cache_helper.dart';
 import 'package:cosmetics/core/logic/helper_method.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:cosmetics/core/ui/app_floating_action_widget.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
@@ -48,6 +48,7 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
         currentIndex++;
       });
     } else {
+      CacheHelper.setIsNotFirstTime();
       goTo(page: LoginView(), canPop: false);
     }
   }
@@ -81,7 +82,7 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
         children: [
           Center(
             child: AppImage(
-              path: page['image'],
+              image: page['image'],
               width: currentIndex == 1 ? 314.w : 240.w,
               height: currentIndex == 1 ? 288.h : 230.h,
             ),
@@ -119,8 +120,8 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
                   onPressed: nextPage,
                 )
               : AppButton(
-                  buttonText: page['buttonText'],
-                  buttonColor: AppColors.primaryColor,
+                  text: page['buttonText'],
+                  color: AppColors.primaryColor,
 
                   onTap: nextPage,
                 ),
@@ -128,4 +129,9 @@ class _OnBordingSinglePageState extends State<OnBordingView> {
       ),
     );
   }
+}
+
+class _Model {
+  final String image, text, desc;
+  _Model(this.image, this.text, this.desc);
 }

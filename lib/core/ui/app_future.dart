@@ -1,11 +1,10 @@
 import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppInputFuture extends StatefulWidget {
+class AppSerach extends StatefulWidget {
   final String? hintText;
-
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final double? width;
@@ -17,8 +16,9 @@ class AppInputFuture extends StatefulWidget {
   void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final String? Function(String?)? validator;
+  final bool? isDense;
 
-  AppInputFuture({
+  AppSerach({
     super.key,
     this.hintText,
 
@@ -32,13 +32,14 @@ class AppInputFuture extends StatefulWidget {
     this.validator,
     this.onChanged,
     this.keyboardType,
+    this.isDense,
   });
 
   @override
-  State<AppInputFuture> createState() => _AppInputFutureState();
+  State<AppSerach> createState() => _AppSerachState();
 }
 
-class _AppInputFutureState extends State<AppInputFuture> {
+class _AppSerachState extends State<AppSerach> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -49,15 +50,13 @@ class _AppInputFutureState extends State<AppInputFuture> {
         onChanged: widget.onChanged,
         onFieldSubmitted: widget.onFieldSubmitted,
         keyboardType: widget.keyboardType,
-
         controller: widget.controller,
-
         validator: widget.validator,
-
         autofocus: false,
         obscureText: widget.isPassword ?? false,
         cursorColor: AppColors.primaryColor,
         decoration: InputDecoration(
+          isDense: widget.isDense ?? false,
           labelStyle: TextStyle(
             fontSize: 14.sp,
             color: Color(0xff8E8EA9),

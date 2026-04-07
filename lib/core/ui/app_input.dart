@@ -57,6 +57,7 @@ class _AppInputState extends State<AppInput> {
             color: Color(0xff8E8EA9),
             fontWeight: FontWeight.w400,
           ),
+          floatingLabelStyle: TextStyle(fontSize: 14.sp),
           hintText: widget.hintText ?? "",
           hintStyle: TextStyle(
             fontSize: 14.sp,
@@ -69,19 +70,22 @@ class _AppInputState extends State<AppInput> {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: const BorderSide(color: Color(0xff8E8EA9), width: 0.5),
+            borderSide: const BorderSide(color: Color(0xff5A6690), width: 0.5),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: BorderSide(color: Color(0xff8E8EA9), width: 0.5),
+            borderSide: BorderSide(
+              color: Color(0xff5A6690).withValues(alpha: .4),
+              width: 1,
+            ),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: const BorderSide(color: Colors.red, width: 0.5),
+            borderSide: const BorderSide(color: Colors.red, width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
-            borderSide: const BorderSide(color: Colors.red, width: 0.5),
+            borderSide: const BorderSide(color: Colors.red, width: 1),
           ),
           filled: true,
           fillColor: AppColors.secondaryColor,
