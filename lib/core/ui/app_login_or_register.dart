@@ -1,6 +1,6 @@
 import 'package:cosmetics/core/logic/app_colors.dart';
 import 'package:cosmetics/core/logic/helper_method.dart';
-import 'package:cosmetics/views/auth/create_account.dart';
+import 'package:cosmetics/views/auth/register.dart';
 import 'package:cosmetics/views/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +23,7 @@ class AppLoginOrRegister extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 if (isLogin) {
-                  goTo(page: CreateAccountView());
+                  goTo(page: Register());
                 } else {
                   goTo(page: LoginView());
                 }

@@ -5,16 +5,13 @@ import 'package:cosmetics/core/logic/input_validator.dart';
 import 'package:cosmetics/core/ui/app_back.dart';
 import 'package:cosmetics/core/ui/app_country_code.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
-
 import 'package:cosmetics/network/api_service.dart';
 import 'package:cosmetics/views/auth/data/repo/auth_repo.dart';
-
 import 'package:cosmetics/views/auth/verify.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgetPasswordView extends StatefulWidget {
@@ -40,42 +37,26 @@ class _ForgetPasswordState extends State<ForgetPasswordView> {
   }
 
   /// forget password method
-  // Future<void> forgetPassword() async {
-  //   if (formKey.currentState!.validate()) {
-  //     setState(() => isLoading = true);
+  Future<void> forgetPassword() async {
+    if (formKey.currentState!.validate()) {
+      setState(() => isLoading = true);
 
-  //     try {
-  //       final user = await authRepo.forgetPassword(
-  //         countryCodeController.text.trim(),
-  //         phoneController.text.trim(),
-  //       );
-  //       if (user != null) {
-  //         goTo(page: VerifyView(), canPop: true);
+      try {
+        final user = await authRepo.forgetPassword(
+          _selectedCountyCode.toString(),
+          phoneController.text.trim(),
+        );
+        if (user != null) {
+          goTo(page: VerifyView(), canPop: true);
 
-  //         setState(() => isLoading = false);
-  //       }
-  //     } catch (e) {
-  //       setState(() => isLoading = false);
+          setState(() => isLoading = false);
+        }
+      } catch (e) {
+        setState(() => isLoading = false);
+      }
+    }
+  }
 
-  //       String errorMesg = 'Error In From Forget Password';
-  //       if (e is ApiError) {
-  //         errorMesg = e.message;
-  //       }
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         appSnack(
-  //           'The Forget Password process failed Please try again later.',
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   countryCodeController.text = '+20';
-  //   phoneController.text = '01040509326';
-  //   super.initState();
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,28 +138,7 @@ class _ForgetPasswordState extends State<ForgetPasswordView> {
             55.ph,
             isLoading
                 ? CupertinoActivityIndicator(color: AppColors.buttonColor)
-                : AppButton(
-                    text: 'Next',
-
-                    onTap: () {
-                      final res = apiService.post('/api/Auth/resend-otp', {
-                        "countryCode": _selectedCountyCode,
-
-                        "phoneNumber": phoneController.text.trim(),
-                      });
-
-                      if (res != null) {
-                        goTo(
-                          page: VerifyView(
-                            phoneNumber: phoneController.text.toString(),
-                          ),
-                        );
-                      } else {
-                        showMsg('Erorr In Verify Otp ', isErorr: true);
-                      }
-                      // forgetPassword();
-                    },
-                  ),
+                : AppButton(text: 'Next', onTap: forgetPassword),
           ],
         ),
       ),

@@ -75,7 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
           _Header(),
           53.ph,
           Text(
-            PrefHelper.name ?? 'Visetor',
+            '',
+            // PrefHelper.name ?? 'Visetor',
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,

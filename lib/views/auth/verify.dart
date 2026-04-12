@@ -8,6 +8,7 @@ import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/core/ui/app_verify_code.dart';
 import 'package:cosmetics/network/api_service.dart';
 import 'package:cosmetics/views/auth/create_password.dart';
+import 'package:cosmetics/views/auth/data/repo/auth_repo.dart';
 import 'package:cosmetics/views/home/veiw.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _VerifyViewState extends State<VerifyView> {
   final passwordController = TextEditingController();
 
   final ApiService apiService = ApiService();
+  final AuthRepo authRepo = AuthRepo();
   String? otp;
 
   Timer? _timer;
@@ -82,16 +84,23 @@ class _VerifyViewState extends State<VerifyView> {
   }
 
   Future<void> getVirifyData() async {
-    final phone = phoneController.text.trim();
-    final password = passwordController.text.trim();
-    try {
-      final res = await apiService.post('/api/Auth/verify-otp', {
-        "countryCode": "+20",
-        "phoneNumber": '01020304040',
-        "otpCode": "1111",
-      });
-    } catch (e) {}
+    /// Error Here
+    final user = await authRepo.verifyOtp(
+      '+20',
+      phoneController.text.trim(),
+      '1111',
+    );
   }
+  //   final phone = phoneController.text.trim();
+  //   final password = passwordController.text.trim();
+  //   try {
+  //     final res = await apiService.post('/api/Auth/verify-otp', {
+  //       "countryCode": "+20",
+  //       "phoneNumber": '01020304040',
+  //       "otpCode": "1111",
+  //     });
+  //   } catch (e) {}
+  // }
 
   @override
   Widget build(BuildContext context) {

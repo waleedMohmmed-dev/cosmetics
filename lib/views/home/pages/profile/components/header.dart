@@ -45,7 +45,7 @@ class _HeaderState extends State<_Header> {
                 decoration: BoxDecoration(shape: BoxShape.circle),
                 child: AppImage(
                   image:
-                      PrefHelper.image ??
+                      // PrefHelper.image ??
                       "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20597.jpg?semt=ais_incoming&w=740&q=80",
                   fit: BoxFit.cover,
                 ),

@@ -109,4 +109,36 @@ class AuthRepo {
       throw ApiError(message: e.toString());
     }
   }
+
+  /// Verify OTP
+  Future<void> verifyOtp(
+    String countryCode,
+    String phoneNumber,
+    String otpCode,
+  ) async {
+    try {
+      final res = apiService.post('/api/Auth/verify-otp', {
+        "countryCode": countryCode,
+        "phoneNumber": phoneNumber,
+        "otpCode": otpCode,
+      });
+    } catch (e) {
+      throw ApiError(message: e.toString());
+    }
+  }
+
+  /// Create password
+  Future<void> createPassword(
+    String countryCode,
+    String phoneNumber,
+    String newPassword,
+    String confirmPassword,
+  ) async {
+    final res = await apiService.post('/api/Auth/reset-password', {
+      "countryCode": countryCode,
+      "phoneNumber": phoneNumber,
+      "newPassword": newPassword,
+      "confirmPassword": confirmPassword,
+    });
+  }
 }

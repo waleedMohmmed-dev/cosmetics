@@ -6,7 +6,6 @@ import 'package:cosmetics/core/ui/app_country_code.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/core/ui/app_login_or_register.dart';
 import 'package:cosmetics/network/api_error.dart';
-import 'package:cosmetics/network/api_service.dart';
 import 'package:cosmetics/views/auth/data/repo/auth_repo.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_input.dart';
@@ -17,14 +16,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CreateAccountView extends StatefulWidget {
-  const CreateAccountView({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<CreateAccountView> createState() => _RegisterViewState();
+  State<Register> createState() => _RegisterViewState();
 }
 
-class _RegisterViewState extends State<CreateAccountView> {
+class _RegisterViewState extends State<Register> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();

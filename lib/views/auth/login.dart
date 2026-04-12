@@ -7,6 +7,7 @@ import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/core/ui/app_login_or_register.dart';
 import 'package:cosmetics/network/api_error.dart';
 import 'package:cosmetics/network/api_service.dart';
+import 'package:cosmetics/utils/pref_helper.dart';
 import 'package:cosmetics/views/auth/data/repo/auth_repo.dart';
 import 'package:cosmetics/views/auth/forget_password.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
@@ -56,6 +57,7 @@ class _LoginViewState extends State<LoginView> {
 
         if (user != null) {
           goTo(page: const MianView(), canPop: false);
+          await PrefHelper.saveToken(user.token!);
         }
         setState(() => isLoading = false);
       } catch (e) {
@@ -216,3 +218,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+
+ //Plays
+// Medal of Holler = Action game 
+///pin feat girl  =  torid = gata 

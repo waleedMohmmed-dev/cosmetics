@@ -78,7 +78,7 @@ class _ProductsState extends State<_Products> {
                       onTap: () {
                         goTo(
                           page: ProductDetailsScreen(
-                            product: product, // ✅ FIX
+                            products: product, // ✅ FIX
                           ),
                         );
                       },

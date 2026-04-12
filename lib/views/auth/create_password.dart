@@ -5,6 +5,7 @@ import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/core/ui/app_input.dart';
 import 'package:cosmetics/network/api_service.dart';
+import 'package:cosmetics/views/auth/data/repo/auth_repo.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,14 +23,15 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final ApiService apiService = ApiService();
+  final AuthRepo authRepo = AuthRepo();
 
-  Future<void> getData() async {
-    final res = await apiService.post('/api/Auth/reset-password', {
-      "countryCode": '+20',
-      "phoneNumber": "1234567890",
-      "newPassword": "01030405060",
-      "confirmPassword": "01030405060",
-    });
+  Future<void> createPassword() async {
+    final res = await authRepo.createPassword(
+      '+20',
+      '01030405050',
+      newPasswordController.text.trim(),
+      confirmPasswordController.text.trim(),
+    );
   }
 
   @override
@@ -42,7 +44,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
   @override
   void initState() {
     super.initState();
-    getData();
+    createPassword();
   }
 
   @override
@@ -109,7 +111,7 @@ class _CreatePasswordViewState extends State<CreatePasswordView> {
                 text: 'Confirm',
 
                 onTap: () {
-                  getData();
+                  createPassword();
                   showDialog(
                     context: context,
                     builder: (_) => const Dialog(

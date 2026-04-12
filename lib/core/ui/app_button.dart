@@ -17,6 +17,7 @@ class AppButton extends StatelessWidget {
   final Widget? icon;
   final Widget? tralingIcon;
   final bool isLoding;
+  final Widget? widget;
 
   const AppButton({
     super.key,
@@ -32,6 +33,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.tralingIcon,
     this.isLoding = false,
+    this.widget,
   });
 
   @override
@@ -65,6 +67,7 @@ class AppButton extends StatelessWidget {
             ),
           ),
           10.pw,
+          widget ?? const SizedBox.shrink(),
           icon ?? const SizedBox.shrink(),
           tralingIcon ?? const SizedBox.shrink(),
         ],
