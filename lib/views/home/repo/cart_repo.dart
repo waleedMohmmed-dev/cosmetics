@@ -4,7 +4,7 @@ import 'package:cosmetics/views/home/models/cart_mode.dart';
 class CartRepo {
   final ApiService apiService = ApiService();
 
-  // ADD TO CART
+  // ADD TO CART (API)
   Future<CartResponse> addToCart(AddToCart item) async {
     final res = await apiService.post(
       '/api/Cart/add?productId=${item.productId}&quantity=${item.quantity}',
@@ -14,9 +14,9 @@ class CartRepo {
     return CartResponse.fromJson(res);
   }
 
-  // GET CART (⚠️ لازم تتأكد من endpoint الصحيح من backend)
-  Future<dynamic> getCart() async {
+  // GET CART (FIXED)
+  Future<GetCart> getCart() async {
     final res = await apiService.get('/api/Cart/get');
-    return res;
+    return GetCart.fromJson(res);
   }
 }

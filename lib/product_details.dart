@@ -4,6 +4,7 @@ import 'package:cosmetics/core/logic/helper_method.dart';
 import 'package:cosmetics/core/ui/app_button.dart';
 import 'package:cosmetics/core/ui/app_image.dart';
 import 'package:cosmetics/views/home/models/cart_mode.dart';
+import 'package:cosmetics/views/home/repo/cart_manegar.dart';
 import 'package:cosmetics/views/home/repo/cart_repo.dart';
 import 'package:cosmetics/views/home/veiw.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +167,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           quantity: 1,
                         );
 
-                        await cartRepo.addToCart(cartItem);
+                        // API
+                        try {
+                          await cartRepo.addToCart(cartItem);
+                        } catch (e) {}
+
+                        // LOCAL (IMPORTANT)
+                        CartManager().addItem(cartItem);
 
                         setState(() => isLoading = false);
 
@@ -175,6 +182,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           isErorr: false,
                         );
                       },
+                      // onTap: () async {
+                      //   setState(() => isLoading = true);
+
+                      //   final cartItem = AddToCart(
+                      //     productId: product.id,
+                      //     title: product.name_en,
+                      //     imageUrl: product.imageUrl,
+                      //     price: product.price,
+                      //     quantity: 1,
+                      //   );
+
+                      //   await cartRepo.addToCart(cartItem);
+
+                      //   setState(() => isLoading = false);
+
+                      //   showMsg(
+                      //     'Product added to cart successfully',
+                      //     isErorr: false,
+                      //   );
+                      // },
                     ),
                   ),
                 ],
